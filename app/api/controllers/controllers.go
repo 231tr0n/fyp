@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"soubhagya/ml"
-	"soubhagya/router"
+	"fyp/ml"
+	"fyp/router"
 )
 
 var calibrateModel ml.Model

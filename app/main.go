@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"soubhagya/api/middlewares"
-	"soubhagya/api/routes"
-	"soubhagya/config"
-	"soubhagya/router"
+	"fyp/api/middlewares"
+	"fyp/api/routes"
+	"fyp/config"
+	"fyp/router"
 	"syscall"
 )
 

@@ -2,8 +2,8 @@ package routes
 
 import (
 	"os"
-	"soubhagya/api/controllers"
-	"soubhagya/router"
+	"fyp/api/controllers"
+	"fyp/router"
 )
 
 func AddRoutes(r *router.Router) {

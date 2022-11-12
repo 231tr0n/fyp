@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"net/http"
-	"soubhagya/router"
+	"fyp/router"
 )
 
 var middlewares map[string]router.Middleware
