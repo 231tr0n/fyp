@@ -6,7 +6,7 @@ sudo apt install software-properties-common
 sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt update
 sudo apt install golang-go python3 python3-pip libgl1
-sudo pip3 install mediapipe opencv-python imutils matplotlib numpy tensorflow torch torchvision
+sudo pip3 install mediapipe opencv-python numpy tensorflow
 sudo pip3 install protobuf==3.20.*
 ```
 

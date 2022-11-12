@@ -9,13 +9,13 @@ import (
 )
 
 type Model struct {
-	model			*exec.Cmd
-	in				io.WriteCloser
-	out				io.ReadCloser
-	err				io.ReadCloser
+	model     *exec.Cmd
+	in        io.WriteCloser
+	out       io.ReadCloser
+	err       io.ReadCloser
 	outReader *bufio.Reader
 	errReader *bufio.Reader
-	mu				sync.Mutex
+	mu        sync.Mutex
 }
 
 func (m *Model) Init(command string, arguments ...string) {

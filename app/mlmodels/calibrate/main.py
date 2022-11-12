@@ -1,4 +1,5 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import sys
 import cv2
 import numpy as np
@@ -6,7 +7,6 @@ import mediapipe as mp
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import load_model
-from keras.preprocessing import image
 
 try:
 	os.chdir(sys.argv[0].split("/main.py")[0])
@@ -14,24 +14,58 @@ except:
 	print("failed to change dir")
 
 model = load_model('model.h5')
+alphabets = list("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-def model_predict(img_path, model):
-	img = tf.keras.preprocessing.image.load_img(img_path, target_size=(128, 128, 3))
-	x = tf.keras.preprocessing.image.img_to_array(img)
-	x = np.expand_dims(x, axis = 0)
-	preds = model.predict(x)
-	return preds
-
-def predict_image(path, model):
-	classes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-	y_prob = model_predict(path, model)
-	li = y_prob.tolist()
-	res = list(filter(lambda i: i > 0.95, li[0]))
-	if len(res) > 0:
-		return classes[li[0].index(res[0])]
-	else:
+def model_predict(results, model, alphabets):
+	arr = []
+	if not results.multi_hand_landmarks:
 		return '_'
-
+	else:
+		if len(results.multi_hand_landmarks) == 1:
+			if results.multi_handedness[0].classification[0].label == 'left':
+				for i in results.multi_hand_landmarks[0].landmark:
+					arr.append(i.x)
+					arr.append(i.y)
+					arr.append(i.z)
+				for i in range(63):
+					arr.append(0)
+			else:
+				for i in range(63):
+					arr.append(0)
+				for i in results.multi_hand_landmarks[0].landmark:
+					arr.append(i.x)
+					arr.append(i.y)
+					arr.append(i.z)
+		else:
+			if not results.multi_handedness[0].classification[0].label == results.multi_handedness[1].classification[0].label:
+				if results.multi_handedness[0].classification[0].label == 'left':
+					for i in results.multi_hand_landmarks[0].landmark:
+						arr.append(i.x)
+						arr.append(i.y)
+						arr.append(i.z)
+					for i in results.multi_hand_landmarks[1].landmark:
+						arr.append(i.x)
+						arr.append(i.y)
+						arr.append(i.z)
+				else:
+					for i in results.multi_hand_landmarks[1].landmark:
+						arr.append(i.x)
+						arr.append(i.y)
+						arr.append(i.z)
+					for i in results.multi_hand_landmarks[0].landmark:
+						arr.append(i.x)
+						arr.append(i.y)
+						arr.append(i.z)
+			else:
+				return '_'
+		arr = np.array(arr)
+		y_prob = model.predict(arr.reshape((1, -1)), verbose = 0)
+		li = y_prob.tolist()
+		res = list(filter(lambda i: i > 0.75, li[0]))
+		if len(res) > 0:
+				return alphabets[li[0].index(res[0])]
+		else:
+				return '_'
 
 hands = mp.solutions.hands.Hands(static_image_mode = True, max_num_hands = 2, min_detection_confidence = 0.5)
 face = mp.solutions.face_detection.FaceDetection(model_selection = '0', min_detection_confidence = 0.5)
@@ -53,13 +87,13 @@ while True:
 				array.append('Right Hand')
 				array.append('Left Hand')
 			else:
-				label = hands_results.multi_handedness[0].classification[0].label
 				if len(hands_results.multi_handedness) == 1:
+					label = hands_results.multi_handedness[0].classification[0].label
 					if (label == 'Left'):
 						array.append('Left Hand')
 					else:
 						array.append('Right Hand')
-			prediction = predict_image(file_path, model)
+			prediction = model_predict(hands_results, model, alphabets)
 			array.append(prediction)
 			joined_array = ", ".join(array)
 			print(joined_array)
