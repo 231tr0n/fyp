@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name = "viewport" content = "width = device-width, initial-scale = 1">
+		<title>Soubhagya</title>
+		<link rel = "stylesheet" href = "/public/css/style.css">
+	</head>
+	<body style = 'background-color: #89aae6;'>
+		<div class = 'chatbox'>
+			<table cellspacing = '10'>
+				<caption style = 'color: white; font-size: 50px;'>UMANG Sign Language Chat</caption>
+				<tr>
+					<td class = 'talk-bubble tri-right border round btm-left-in'>
+						<p id = 'prediction'></p>
+					</td>
+					<td class = 'talk-bubble tri-right border round btm-right-in'>
+						<video style = 'border: 10px solid #89aae6; border-radius: 30px;' id = 'video' style = '' autoplay muted></video>
+						<br>
+						<br>
+						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/left.png' alt = 'not available' id = 'leftimg' hidden>
+						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/face.png' alt = 'not available' id = 'faceimg' hidden>
+						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/right.png' alt = 'not available' id = 'rightimg' hidden>
+						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/tick.png' alt = 'not available' id = 'tickimg' hidden>
+					</td>
+				</tr>
+				<tr>
+					<td style = 'cellspacing: 0px; text-align: left;'>
+						<img style = 'width: 50px; height: 50px; border-radius: 50%' src = '/public/images/bot.png' alt = 'not available'>
+					</td>
+					<td style = 'cellspacing: 0px; text-align: right;'>
+						<img style = 'width: 50px; height: 50px; border-radius: 50%' src = '/public/images/user.png' alt = 'not available'>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<canvas id = 'drawer' hidden></canvas>
+		<script src = '/public/js/script.js'></script>
+	</body>
+</html>

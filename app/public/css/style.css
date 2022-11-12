@@ -1,0 +1,114 @@
+button {
+  background-color: #f76c6c;
+  border: 5px solid #f76c6c;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color: #f76c6c;
+}
+
+.botchatbubble {
+  border-radius: 30px 30px 30px 3px;
+  background-color: #f76c6c;
+  padding: 20px;
+  min-height: 100%;
+  height: 100%;
+}
+
+.userchatbubble {
+  min-height: 100%;
+  height: 100%;
+  padding: 20px;
+  text-align: center;
+  border-radius: 30px 30px 3px 30px;
+  background-color: #f76c6c;
+}
+
+.chatbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 30px;
+  background-color: #374785;
+}
+
+.talk-bubble {
+  text-align: center;
+  margin: 40px;
+  position: relative;
+  width: 200px;
+  min-width: 400px;
+  height: auto;
+  background-color: #a8d0e6;
+  padding: 20px;
+}
+
+.round {
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+}
+
+.border {
+  border: 8px solid #24305e;
+}
+
+.tri-right.border.btm-right-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 30px;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #24305e #24305e transparent transparent;
+}
+
+.tri-right.btm-right-in:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: 38px;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: #a8d0e6 #a8d0e6 transparent transparent;
+}
+
+.tri-right.border.btm-left-in:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  right: auto;
+  top: auto;
+  bottom: -40px;
+  border: 20px solid;
+  border-color: #24305e transparent transparent #24305e;
+}
+
+.tri-right.btm-left-in:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 38px;
+  right: auto;
+  top: auto;
+  bottom: -20px;
+  border: 12px solid;
+  border-color: #a8d0e6 transparent transparent #a8d0e6;
+}
