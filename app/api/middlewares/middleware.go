@@ -2,9 +2,9 @@ package middlewares
 
 import (
 	"fmt"
+	"fyp/router"
 	"github.com/google/uuid"
 	"net/http"
-	"fyp/router"
 )
 
 var middlewares map[string]router.Middleware

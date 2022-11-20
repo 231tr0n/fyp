@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"os"
-	"os/signal"
 	"fyp/api/middlewares"
 	"fyp/api/routes"
 	"fyp/config"
 	"fyp/router"
+	"net/http"
+	"os"
+	"os/signal"
 	"syscall"
 )
 

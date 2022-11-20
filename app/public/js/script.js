@@ -73,6 +73,60 @@ const chatbot = function (params) {
 
 	let reply = true;
 	let interval = null;
+	const sample_size = 12;
+	let counter = 0;
+	let json = {};
+	let bool = false;
+	let swap = true;
+
+	const text_predict = () => {
+		document.getElementById('predicted-text').innerText = '';
+		document.getElementById('final-text').innerText = '';
+		counter = 0;
+		json = {};
+		bool = true;
+	};
+
+	document.getElementById('swap').onclick = () => {
+		if (swap) {
+			document.getElementById('swap').innerText = 'Select Options';
+			document.getElementById('enter-text').hidden = false;
+			document.getElementById('select-option').hidden = true;
+			swap = false;
+			text_predict();
+		} else {
+			bool = false;
+			document.getElementById('swap').innerText = 'Enter Text';
+			document.getElementById('enter-text').hidden = true;
+			document.getElementById('select-option').hidden = false;
+			swap = true;
+		}
+	};
+
+	document.getElementById('submit-output').onclick = () => {
+		bool = false;
+		const text = document.getElementById('predicted-text').innerText;
+		let temp = '';
+		let t = '';
+		for (let i = 0; i < text.length; i ++) {
+			if (text[i] != t) {
+				t = text[i];
+				temp += text[i];
+			}
+		}
+		fetch('/spellcheck', {
+			method: 'POST',
+			mode: 'same-origin',
+			credentials: 'same-origin',
+			body: temp
+		}).then((res) => res.text()).then((res) => {
+			document.getElementById('final-text').innerText = res.toUpperCase();
+		}).catch((error) => {
+			console.log(error);
+			alert('Fetch request failed. Press this button to reload.');
+			location.reload();
+		});
+	};
 
 	const prediction_box = document.getElementById(params.prediction_box);
 	const tick_img = document.getElementById(params.tick_img);
@@ -125,9 +179,39 @@ const chatbot = function (params) {
 			} else {
 				tick_img.hidden = true;
 			}
-			const answer = res.split(', ');
-			if (answer[answer.length - 1].length == 1) {
-				prediction_box.innerText = answer[answer.length - 1];
+			let answer = res.split(', ');
+			answer = answer[answer.length - 1];
+			const characters = ['1', '2', '3', '4', 'A', 'B', 'C'];
+			if (answer.length == 1) {
+				prediction_box.innerText = answer;
+				if (swap) {
+					if (characters.includes(answer)) {
+						document.getElementById(`radio${answer}`).checked = true;
+					}
+				} else {
+					if (answer != '_' && bool) {
+						if (counter < sample_size) {
+							counter += 1;
+							if (json[answer]) {
+								json[answer] += 1;
+							} else {
+								json[answer] = 1;
+							}
+						} else {
+							let maximum = 0;
+							let index = 0;
+							for (const i of Object.keys(json)) {
+								if (maximum < json[i]) {
+									maximum = json[i];
+									index = i;
+								}
+							}
+							document.getElementById('predicted-text').innerText += index;
+							counter = 0;
+							json = {};
+						}
+					}
+				}
 			}
 		}
 	});

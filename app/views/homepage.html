@@ -10,17 +10,52 @@
 			<table cellspacing = '10'>
 				<caption style = 'color: white; font-size: 50px;'>UMANG Sign Language Chat</caption>
 				<tr>
-					<td class = 'talk-bubble tri-right border round btm-left-in'>
-						<p id = 'prediction'></p>
+					<td style = 'color: black;' class = 'talk-bubble tri-right border round btm-left-in'>
+						<table style = 'width: 100%;'>
+							<tr>
+								<td align = 'center'><button id = 'swap'>Enter Text using Sign Language</button></td>
+							</tr>
+							<tr>
+								<td>
+									<div style = 'background-color: #89aae6; padding: 5px; border-radius: 5px;' id = 'select-option' align = 'left'>
+										<ol>
+											<li><input type = 'radio' name = 'radio' id = 'radio1' value = '1'></li>
+											<li><input type = 'radio' name = 'radio' id = 'radio2' value = '2'></li>
+											<li><input type = 'radio' name = 'radio' id = 'radio3' value = '3'></li>
+											<li><input type = 'radio' name = 'radio' id = 'radio4' value = '4'></li>
+										</ol>
+										<ul type = 'A'>
+											<li><input type = 'radio' name = 'radio' id = 'radioA' value = 'a'></li>
+											<li><input type = 'radio' name = 'radio' id = 'radioB' value = 'b'></li>
+											<li><input type = 'radio' name = 'radio' id = 'radioC' value = 'c'></li>
+										</ul>
+									</div>
+									<div style = 'color: black; background-color: #89aae6; padding: 5px; border-radius: 5px;' id = 'enter-text' align = 'left' hidden>
+										Predicted Text: <span id = 'predicted-text'></span><br>
+										Final Text: <span id = 'final-text'></span><br>
+										<div style = 'width: 100%' align = 'center'><button id = 'submit-output'>Run NLP</button></div>
+									</div>
+								</td>
+							</tr>
+						</table>
 					</td>
 					<td class = 'talk-bubble tri-right border round btm-right-in'>
 						<video style = 'border: 10px solid #89aae6; border-radius: 30px;' id = 'video' style = '' autoplay muted></video>
 						<br>
 						<br>
-						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/left.png' alt = 'not available' id = 'leftimg' hidden>
-						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/face.png' alt = 'not available' id = 'faceimg' hidden>
-						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/right.png' alt = 'not available' id = 'rightimg' hidden>
-						<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/tick.png' alt = 'not available' id = 'tickimg' hidden>
+						<table style = 'width: 100%; background-color: #89aae6; padding: 5px; border-radius: 5px;'>
+							<tr>
+								<td align = 'left'>
+									<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/left.png' alt = 'not available' id = 'leftimg' hidden>
+									<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/face.png' alt = 'not available' id = 'faceimg' hidden>
+									<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/right.png' alt = 'not available' id = 'rightimg' hidden>
+									<img style = 'border-radius: 50%; width: 50px; height: 50px;' src = '/public/images/tick.png' alt = 'not available' id = 'tickimg'>
+								</td>
+								<td align = 'right'>
+									<font size = '7'><span id = 'prediction' style = 'color: #f76c6c;'></span></font>
+								</td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 				<tr>
