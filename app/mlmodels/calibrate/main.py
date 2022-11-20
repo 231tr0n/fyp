@@ -61,7 +61,7 @@ def model_predict(results, model, alphabets):
 		arr = np.array(arr)
 		y_prob = model.predict(arr.reshape((1, -1)), verbose = 0)
 		li = y_prob.tolist()
-		res = list(filter(lambda i: i > 0.75, li[0]))
+		res = list(filter(lambda i: i > 0.97, li[0]))
 		if len(res) > 0:
 				return alphabets[li[0].index(res[0])]
 		else:
