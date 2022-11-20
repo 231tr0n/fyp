@@ -10,13 +10,13 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"path/filepath"
 )
 
 func main() {
 	os.RemoveAll("temp")
 	os.Mkdir("temp", os.ModePerm)
-	os.Mkdir("temp/videos", os.ModePerm)
-	os.Mkdir("temp/pictures", os.ModePerm)
+	os.Mkdir(filepath.FromSlash("temp/pictures"), os.ModePerm)
 	defer os.RemoveAll("temp")
 	r := router.Router{}
 	r.Init(false)

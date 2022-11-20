@@ -16,9 +16,9 @@ var spellCheckModel ml.Model
 
 func init() {
 	temp, _ := os.Getwd()
-	calibrateModel.Init("python3", temp+"/mlmodels/calibrate/main.py")
+	calibrateModel.Init("python3", filepath.FromSlash(temp+"/mlmodels/calibrate/main.py"))
 	fmt.Println("Model 1 Loaded.")
-	spellCheckModel.Init("python3", temp+"/mlmodels/nlp/main.py")
+	spellCheckModel.Init("python3", filepath.FromSlash(temp+"/mlmodels/nlp/main.py"))
 	fmt.Println("Model 2 Loaded.")
 }
 
@@ -63,6 +63,6 @@ var Calibrate router.Controller = func(res http.ResponseWriter, req *http.Reques
 	}
 	res.Header().Set("Content-Type", "text/plain")
 	temp, _ := os.Getwd()
-	answer := []byte(calibrateModel.Predict(temp + "/" + filePath))
+	answer := []byte(calibrateModel.Predict(filepath.FromSlash(temp + "/" + filePath)))
 	res.Write(answer)
 }
