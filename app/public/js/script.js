@@ -73,66 +73,55 @@ const chatbot = function (params) {
 
 	let reply = true;
 	let interval = null;
-	const sample_size = 12;
+	const sample_size = 10;
 	let counter = 0;
 	let json = {};
 	let bool = false;
-	let swap = true;
+	const questions = ['Name', 'Year of birth', 'Gender', 'Id Number'];
+	let question_index = 0;
+	const answers = {};
 
 	const text_predict = () => {
-		document.getElementById('predicted-text').innerText = '';
-		document.getElementById('final-text').innerText = '';
-		counter = 0;
-		json = {};
-		bool = true;
-	};
-
-	document.getElementById('swap').onclick = () => {
-		if (swap) {
-			document.getElementById('swap').innerText = 'Select Options';
-			document.getElementById('enter-text').hidden = false;
-			document.getElementById('select-option').hidden = true;
-			swap = false;
-			text_predict();
+		if (question_index >= questions.length) {
+			document.getElementById('chat').innerHTML += `<div style = 'float: left;'><div style = "border-radius: 10px; width: 300px; height: auto; background-color: #293e49; padding: 10px; color: white;">${JSON.stringify(answers, null, 4)}</div></div>`;
 		} else {
-			bool = false;
-			document.getElementById('swap').innerText = 'Enter Text';
-			document.getElementById('enter-text').hidden = true;
-			document.getElementById('select-option').hidden = false;
-			swap = true;
+			document.getElementById('predicted-text').innerText = '';
+			document.getElementById('chat').innerHTML += `<div style = 'float: left;'><div style = "border-radius: 10px; width: 300px; height: auto; background-color: #293e49; padding: 10px; color: white;">Enter ${questions[question_index]}</div></div>`;
+			question_index += 1;
+			counter = 0;
+			json = {};
+			bool = true;
 		}
 	};
+	text_predict();
 
 	document.getElementById('submit-output').onclick = () => {
 		bool = false;
 		const text = document.getElementById('predicted-text').innerText;
-		let temp = '';
-		let t = '';
-		for (let i = 0; i < text.length; i ++) {
-			if (text[i] != t) {
-				t = text[i];
-				temp += text[i];
-			}
-		}
-		fetch('/spellcheck', {
-			method: 'POST',
-			mode: 'same-origin',
-			credentials: 'same-origin',
-			body: temp
-		}).then((res) => res.text()).then((res) => {
-			document.getElementById('final-text').innerText = res.toUpperCase();
-		}).catch((error) => {
-			console.log(error);
-			alert('Fetch request failed. Press this button to reload.');
-			location.reload();
-		});
+		// let temp = '';
+		// let t = '';
+		// for (let i = 0; i < text.length; i ++) {
+			// if (text[i] != t) {
+				// t = text[i];
+				// temp += text[i];
+			// }
+		// }
+		answers[questions[question_index - 1]] = text;
+		document.getElementById('chat').innerHTML += `<div style = 'float: right;'><p style = "border-radius: 10px; width: 300px; height: auto; background-color: #2e7690; padding: 10px; color: white;">${text}</p></div>`;
+		text_predict();
+		// fetch('/spellcheck', {
+			// method: 'POST',
+			// mode: 'same-origin',
+			// credentials: 'same-origin',
+			// body: temp
+		// }).then((res) => res.text()).then((res) => {
+			// document.getElementById('final-text').innerText = res.toUpperCase();
+		// }).catch((error) => {
+			// console.log(error);
+			// alert('Fetch request failed. Press this button to reload.');
+			// location.reload();
+		// });
 	};
-
-	const prediction_box = document.getElementById(params.prediction_box);
-	const tick_img = document.getElementById(params.tick_img);
-	const left_img = document.getElementById(params.left_img);
-	const right_img = document.getElementById(params.right_img);
-	const face_img = document.getElementById(params.face_img);
 
 	const imager = new canvas(canvas_id, video_width, video_height);
 	const calibrator = new video_calibrator(video_id, video_style_width, video_style_height, video_stream);
@@ -159,57 +148,40 @@ const chatbot = function (params) {
 			alert('Internal Error. Press this button to reload.');
 			location.reload();
 		} else {
-			if (res.includes('Face')) {
-				face_img.hidden = false;
-			} else {
-				face_img.hidden = true;
-			}
 			if (res.includes('Right Hand')) {
-				left_img.hidden = false;
+				calibrator.color_right('#0b171e')
 			} else {
-				left_img.hidden = true;
+				calibrator.color_right('#2e7690');
 			}
 			if (res.includes('Left Hand')) {
-				right_img.hidden = false;
+				calibrator.color_left('#0b171e');
 			} else {
-				right_img.hidden = true;
-			}
-			if (!res.includes('Face') && !res.includes('Right Hand') && !res.includes('Left Hand')) {
-				tick_img.hidden = false;
-			} else {
-				tick_img.hidden = true;
+				calibrator.color_left('#2e7690');
 			}
 			let answer = res.split(', ');
 			answer = answer[answer.length - 1];
-			const characters = ['1', '2', '3', '4', 'A', 'B', 'C'];
 			if (answer.length == 1) {
-				prediction_box.innerText = answer;
-				if (swap) {
-					if (characters.includes(answer)) {
-						document.getElementById(`radio${answer}`).checked = true;
-					}
-				} else {
-					if (answer != '_' && bool) {
-						if (counter < sample_size) {
-							counter += 1;
-							if (json[answer]) {
-								json[answer] += 1;
-							} else {
-								json[answer] = 1;
-							}
+				document.getElementById('prediction').innerText = answer;
+				if (answer != '_' && bool) {
+					if (counter < sample_size) {
+						counter += 1;
+						if (json[answer]) {
+							json[answer] += 1;
 						} else {
-							let maximum = 0;
-							let index = 0;
-							for (const i of Object.keys(json)) {
-								if (maximum < json[i]) {
-									maximum = json[i];
-									index = i;
-								}
-							}
-							document.getElementById('predicted-text').innerText += index;
-							counter = 0;
-							json = {};
+							json[answer] = 1;
 						}
+					} else {
+						let maximum = 0;
+						let index = 0;
+						for (const i of Object.keys(json)) {
+							if (maximum < json[i]) {
+								maximum = json[i];
+								index = i;
+							}
+						}
+						document.getElementById('predicted-text').innerText += index;
+						counter = 0;
+						json = {};
 					}
 				}
 			}
@@ -236,7 +208,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 			video_height: 240,
 			video_style_width: '320px',
 			video_style_height: '240px',
-			upload_delay: 1000,
+			upload_delay: 100,
 			video_stream: stream,
 			prediction_box: 'prediction'
 		});
