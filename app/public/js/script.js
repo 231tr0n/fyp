@@ -101,25 +101,25 @@ const chatbot = function (params) {
 		// let temp = '';
 		// let t = '';
 		// for (let i = 0; i < text.length; i ++) {
-			// if (text[i] != t) {
-				// t = text[i];
-				// temp += text[i];
-			// }
+		// if (text[i] != t) {
+		// t = text[i];
+		// temp += text[i];
+		// }
 		// }
 		answers[questions[question_index - 1]] = text;
 		document.getElementById('chat').innerHTML += `<div style = 'float: right;'><p style = "border-radius: 10px; width: 300px; height: auto; background-color: #2e7690; padding: 10px; color: white;">${text}</p></div>`;
 		text_predict();
 		// fetch('/spellcheck', {
-			// method: 'POST',
-			// mode: 'same-origin',
-			// credentials: 'same-origin',
-			// body: temp
+		// method: 'POST',
+		// mode: 'same-origin',
+		// credentials: 'same-origin',
+		// body: temp
 		// }).then((res) => res.text()).then((res) => {
-			// document.getElementById('final-text').innerText = res.toUpperCase();
+		// document.getElementById('final-text').innerText = res.toUpperCase();
 		// }).catch((error) => {
-			// console.log(error);
-			// alert('Fetch request failed. Press this button to reload.');
-			// location.reload();
+		// console.log(error);
+		// alert('Fetch request failed. Press this button to reload.');
+		// location.reload();
 		// });
 	};
 
@@ -149,7 +149,7 @@ const chatbot = function (params) {
 			location.reload();
 		} else {
 			if (res.includes('Right Hand')) {
-				calibrator.color_right('#0b171e')
+				calibrator.color_right('#0b171e');
 			} else {
 				calibrator.color_right('#2e7690');
 			}
