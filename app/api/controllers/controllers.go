@@ -13,13 +13,25 @@ import (
 
 var calibrateModel ml.Model
 var spellCheckModel ml.Model
+var wordSegmentModel ml.Model
 
 func init() {
 	temp, _ := os.Getwd()
 	calibrateModel.Init("python3", filepath.FromSlash(temp+"/mlmodels/calibrate/main.py"))
 	fmt.Println("Model 1 Loaded.")
-	spellCheckModel.Init("python3", filepath.FromSlash(temp+"/mlmodels/nlp/main.py"))
+	spellCheckModel.Init("python3", filepath.FromSlash(temp+"/mlmodels/spellchecker/main.py"))
 	fmt.Println("Model 2 Loaded.")
+	wordSegmentModel.Init("python3", filepath.FromSlash(temp+"/mlmodels/wordsegment/main.py"))
+	fmt.Println("Model 3 Loaded.")
+}
+
+var WordSegment router.Controller = func(res http.ResponseWriter, req *http.Request) {
+	req.Body = http.MaxBytesReader(res, req.Body, 50<<20)
+	bodyStream, _ := io.ReadAll(req.Body)
+	body := string(bodyStream)
+	res.Header().Set("Content-Type", "text/plain")
+	answer := []byte(wordSegmentModel.Predict(body))
+	res.Write(answer)
 }
 
 var SpellCheck router.Controller = func(res http.ResponseWriter, req *http.Request) {

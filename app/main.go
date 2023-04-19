@@ -9,22 +9,22 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"syscall"
 )
 
 func main() {
 	os.RemoveAll("temp")
 	os.Mkdir("temp", os.ModePerm)
-	os.Mkdir(filepath.FromSlash("temp/pictures"), os.ModePerm)
+	os.Mkdir("temp/pictures", os.ModePerm)
 	defer os.RemoveAll("temp")
 	r := router.Router{}
 	r.Init(false)
 	middlewares.AddMiddlewares(&r)
 	routes.AddRoutes(&r)
 	server := http.Server{
-		Addr:    config.Port,
-		Handler: r,
+		Addr:           config.Port,
+		Handler:        r,
+		MaxHeaderBytes: 50 << 20,
 	}
 	fmt.Println("----------------")
 	fmt.Println(r)
