@@ -1,34 +1,34 @@
-## soubhagyo
+## fyp
 
 Installing dependencies
 ```bash
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:longsleep/golang-backports
-sudo apt update
-sudo apt install golang-go python3 python3-pip libgl1
-sudo pip3 install mediapipe opencv-python numpy tensorflow pyspellchecker spellchecker
-sudo pip3 install protobuf==3.20.*
-```
-
-Installing go dependencies and building (**Go to the app directory in the source code root using `cd app`**)
-```bash
-go mod tidy
-go fmt ./...
-go generate
+pacman -Syu --noconfirm
+pacman -Syu go --noconfirm
+pacman -Syu python --noconfirm
+pacman -Syu python-pip --noconfirm
+pacman -Syu libgl --noconfirm
+pip install tensorflow
+pip install opencv-python
+pip install mediapipe
+pip install numpy
+pip install pyspellchecker 
+pip install wordsegment
 ```
 
 Running the server
 ```bash
+go mod tidy
+go fmt ./...
+go generate
 go run main.go
 ```
 
-
-Building docker image (**Go to the source code root**)
+Building docker image
 ```bash
-sudo docker build -t soubhagya .
+sudo docker build -t fyp .
 ```
 
 Running a container of that image
 ```bash
-sudo docker run -it -p 8080:8080 soubhagya
+sudo docker run -it -p 8080:8080 fyp
 ```
