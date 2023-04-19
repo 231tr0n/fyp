@@ -1,13 +1,17 @@
-FROM ubuntu:20.04
-RUN apt-get update
-RUN apt-get install -y curl software-properties-common
-RUN add-apt-repository ppa:longsleep/golang-backports
-RUN apt-get update
-RUN apt-get install -y golang-go python3 python3-pip libgl1
-RUN pip3 install mediapipe opencv-python numpy tensorflow pyspellchecker spellchecker wordsegment
-RUN pip3 install protobuf==3.20.*
+FROM archlinux:latest
+RUN pacman -Syu --noconfirm
+RUN pacman -Syu go --noconfirm
+RUN pacman -Syu python --noconfirm
+RUN pacman -Syu python-pip --noconfirm
+RUN pacman -Syu libgl --noconfirm
+RUN pip install tensorflow
+RUN pip install opencv-python
+RUN pip install mediapipe
+RUN pip install numpy
+RUN pip install pyspellchecker 
+RUN pip install wordsegment
 EXPOSE 8080
 COPY app /root/app
 WORKDIR /root/app
 RUN go mod tidy
-CMD ["go", "run", "main.go"]
+CMD ["go", "run", "."]
