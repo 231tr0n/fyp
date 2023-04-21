@@ -1,0 +1,234 @@
+%input macros (i.e. write your own macros file called MacroFile1.tex)
+
+%\include{Macros/MacroFile1}
+
+\documentclass[oneside,12pt]{Classes/CUEDthesisPSnPDF}
+
+\usepackage{algorithm,algorithmic}
+
+\usepackage{epsfig}
+
+\usepackage[cmex10]{amsmath}
+
+%% The amssymb package provides various useful mathematical symbols
+
+\usepackage{amssymb}
+
+%% The amsthm package provides extended theorem environments
+
+\usepackage{amsthm}
+
+\usepackage{rotating}
+
+\usepackage{float}
+
+\usepackage{nopageno}
+
+\sloppy
+
+                 
+
+   % Change the Title as per your details
+
+		\title{Indian Sign Language Recognition System for Deaf and Dumb People} 
+
+		\degree{BACHELOR of TECHNOLOGY \\[1ex]in \\[1ex]COMPUTER SCIENCE AND ENGINEERING}
+
+		
+
+		% The year and Month the degree will be officially conferred
+
+		\degreedate{MARCH 2023}      
+
+		% Change the Author name to full name of the person submitting the report.                   
+
+		\author{Rachabattuni Srikar AM.EN.U4AIE19051}
+
+		% Change the Guide name to full name of the Guide.  
+
+		\guide{Dr. Geetha M}
+
+		% Change the register no.  
+
+		\regno{AM.EN.U4AIE19051}
+    
+		% Change the Academic Year
+
+		\academicyear{2022-2023}
+
+% 		\vspace{35pt}
+
+   	\crest{\includegraphics[width=50mm]{UNIVEMBLEM.png}}
+
+
+	  %\crest{\includegraphics[width=50mm]{UniEmblem}}
+
+% 	  \vspace{35pt}
+
+  	\collegeordept{\small{AMRITA SCHOOL OF COMPUTING}}
+
+	  \university{AMRITA VISHWA VIDYAPEETHAM \\ (Estd. U/S 3 of the UGC Act 1956)\\ AMRITAPURI CAMPUS \\[1ex] KOLLAM -690525}
+
+ 		%\includegraphics[width=30mm]{C:/Users/saraths/Downloads/report_template/report_template/UNIVEMBLEM.png}
+
+
+  	%\crestsmall{\includegraphics[width=30mm]{UniEmblem}}		
+
+% Packages that are used  
+
+\usepackage{subfig}
+
+
+\begin{document}
+
+\maketitle
+
+
+\begin{center}
+
+	%{\normalsize {\bfseries{AMRITA VISHWA VIDYAPEETHAM\\[1ex]}}}
+
+	{\normalsize {\bfseries{DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING\\[1ex]}}}
+
+	%{\normalsize {\bfseries{AMRITA SCHOOL OF COMPUTING  ,AMRITAPURI\\[1ex]}}}
+
+	{\normalsize {\bfseries{AMRITA VISHWA VIDYAPEETHAM \\ (Estd. U/S 3 of the UGC Act 1956) \\[1ex]Amritapuri  Campus \\[1ex] Kollam -690525\\[1ex]}}}
+
+	\includegraphics[width=30mm]{UNIVEMBLEM.png}
+
+	%	\\[1ex]					
+
+	\rmfamily\bfseries\upshape\Large
+
+	BONAFIDE CERTIFICATE \\[2ex] % Insert your Project title here
+
+\end{center}
+
+% 		\vspace{1pt}
+
+\rmfamily\mdseries\upshape\normalsize
+
+%\begin{flushleft}
+This is to certify that the project report entitled \textbf{"Indian Sign Language Recognition System for Deaf and Dumb people"} submitted by \textbf{Rachabattuni Srikar(AM.EN.U4AIE19051)}, in partial fulfillment of the requirements for the award of Degree of Bachelor of Technology in Artificail Intelligence Engineering from Amrita Vishwa Vidyapeetham, is a bonafide record of the work carried out by them under my guidance and supervision at Amrita School of Computing, Amritapuri during Semester 8 of the academic year 2022-2023.
+%\end{flushleft}
+
+
+
+%\end{flushleft}
+
+
+
+\vspace{20pt}
+
+\begin{flushleft}
+	\vspace{5pt}
+	Dr. Geetha M \hspace{242pt} Ajila S Babu\\
+
+	\vspace{3pt}
+
+	Project Guide \hspace{230pt} Project Coordinator\\[10ex]
+
+
+
+	Dr. Prema Nedungadi  \hspace{185pt} Reviewer\\  Chairperson\\ Dept. of Computer Science \& Engineering \\[8ex]
+
+
+
+
+\end{flushleft}
+
+\begin{flushleft}
+
+	\vspace{5pt}
+
+	Place	:	Amritapuri \\
+	Date	: 24-04-2023
+
+\end{flushleft}
+
+
+
+\pagebreak
+
+
+\begin{center}
+
+	{\normalsize {\bfseries{DEPARTMENT OF COMPUTER SCIENCE \& ENGINEERING\\[1ex]}}}
+
+	%{\normalsize {\bfseries{AMRITA SCHOOL OF COMPUTING\\[1ex]}}}
+
+	{\normalsize {\bfseries{AMRITA VISHWA VIDYAPEETHAM\\ (Estd. U/S 3 of the UGC Act 1956)\\ [1ex]Amritapuri  Campus \\[1ex] Kollam -690525\\[1ex]}}}
+
+	\includegraphics[width=30mm]{UNIVEMBLEM.png}
+
+	%  \\[1ex]	
+
+	\rmfamily\bfseries\upshape\Large
+
+	DECLARATION \\[2ex]
+
+	%\includegraphics[width=30mm]{UniEmblem}
+
+\end{center}
+
+\vspace{1pt}
+
+We, \textbf{Rachabattuni Srikar(AM.EN.U4AIE19051)} hereby declare that this project entitled \textbf{"Indian Sign Langauge Recognition System for Deaf and Dumb People"} is a record of the original work done by us under the guidance of \textbf{Dr. Geetha M}, Dept. of Computer Science and Engineering, Amrita Vishwa Vidyapeetham, that this work has not formed the basis for any degree/diploma/associationship/fellowship or similar awards to any candidate in any university to the best of our knowledge.\\
+
+\vspace{60pt}
+
+\begin{flushleft}
+
+	Place	:	Amritapuri\\[1ex]
+
+	Date	:	24-04-2023\\[15ex]
+
+	Signature of the student \hspace{90pt}	Signature of the Project Guide\\
+
+\end{flushleft}
+
+\setcounter{secnumdepth}{3}
+
+\setcounter{tocdepth}{3}
+
+\frontmatter % book mode only
+
+%\pagenumbering{roman}
+
+\include{Acknowledgement/acknowledgement}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -59,6 +59,16 @@ Our contributions to this project are:-
 
 \section{Indian Sign Language}
 Indian Sign Language (ISL) is used in the deaf community all over India. It is a way of conversing with other people without speaking by showing hand signs which represent characters(alphabets or numbers). In the past years, there has been an increased interest among researchers in the field of sign language recognition. One of which is to introduce means of interaction from human to computer. Deaf and Dumb people generally rely on sign language interpreters for communication. Finding experienced and qualified interpreters for their daily communication throughout life is a very difficult task and also unaffordable. Hence, a human to computer interaction system will prove to be a reliable and consistent solution in the future for deaf and dumb people.The ISL has different hand sign for each character so that a person can show these hand signs to spell out the word they want to convey or the sentence they want to convey to others. Now this medium has been used by us in this project as a common medium between the user and computer for conversing since most of the deaf people generally use this sign language to converse with each other.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=1]{isl.png}}
+	\caption{ISL Hand Signs}
+	\label{Isl}
+\end{figure}
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=1]{isl_0.png}}
+	\caption{ISL Hand Sign for 0}
+	\label{Isl0}
+\end{figure}
 
 \chapter{Models, Architecture and Proposed Frameworks}
 
@@ -82,16 +92,41 @@ This work enhanced keyframe centered clips (KCC) sampling to provide a new type 
 \section{Methodology, Architecture and Proposed Frameworks}
 
 \subsection{Architecture}
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.4]{architecture.png}}
+	\caption{Chatbot Architecture}
+	\label{Architecture}
+\end{figure}
 When the user accesses the chatbot from the frontend, he provides the webcam feed to it in which he shows the hand sign. Now this frame is sent to the backend which then sends it to the python prediction model. When the model receives the image, it first extracts the hand coordinates from the image using mediapipe and then passes it to a special preprocessing function which translates and transforms the coordinates and sends to the the actual neural network classifier which then gives an output as to which character was shown in the image. Now this predicted character is passed back to the backend ny the python prediction model which then passes it to the frontend. If the user is inputting a word and he wants to correct the spelling, then we can enable spellchecking for that entered word to get it autocorrected. When spellchecking is enabled, the frontend will send the incorrect word to the backend which sends the incorrect word to the pyspellchecker based python NLP module which returns back the correct spelling to the backend which is then returned back to the frontend by the backend. In the same way, this also applies if we want word segmentation in case we are inputting sentences instead of words.
 
 \subsection{Using Inception-ResNet-v2 convolutional neural network (CNN) pre-trained model to detect hand signs in the image}
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.5]{cnn.jpg}}
+	\caption{CNN model architecture}
+	\label{Cnn}
+\end{figure}
 Deep convolutional networks have been at the heart of the most significant breakthroughs in image recognition performance in recent years. The Inception design, for example, has been proven to deliver extremely excellent performance at a cheap computational cost. Recently, the use of residual connections in combination with a more conventional design produced state-of-the-art performance in the 2015 ILSVRC challenge, comparable to the current generation Inception-v3 network. This begs the issue of whether combining the Inception design with residual connections is beneficial. We show here that training using residual connections considerably speeds up the training of Inception networks. In addition, there is some evidence that residual Inception networks outperform comparably priced Inception networks without residual connections by a narrow margin. In addition, we offer various novel simplified designs for residual and non-residual Inception networks. The Inception-ResNet-v2 convolutional neural network was trained on over a million photos from the ImageNet collection. The network has 164 layers and can identify photos into 1000 item categories, including keyboards, mice, pencils, and a variety of animals. As a consequence, the network has learnt detailed feature representations for a diverse set of pictures. The network's picture input size is 299 by 299 pixels. In this approach a CNN model is trained specifically inceptionresnetv2 with the given dataset and the aim is to try to increase its accuracy by making minor tweaks to the model. After trying out many popular CNN classifiers like ShuffleNet and different versions of ResNet it turns out that InceptionResNet outperformed these models and gave good accuracy both in training and testing when compared to all other models. So basically in this architecture, we pass the image directly to the CNN and make it predict which character's ISL hand sign of the 36 characters is shown in the image and get the output.
 
 \subsubsection{Using erosion and dialation to get all the borders in the picture}
-This is a special image processing technique which was later used as the preprocessing function for the dataset passed to the CNN to get a little bit better accuracy. We will first erode and dilate the given image and subtract the eroded image from the dilated which will result in an black and white image consists of edges in white and the background in black. This technique is useful for detecting the shape of the hand which is very crucial feature for the classifier model to consider and helps in making the model not focus on other parameters like color of the hand, background, etc.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.5]{erosion_dialation.jpg}}
+	\caption{Erosion and Dialation of a image}
+	\label{Erosion_dialation}
+\end{figure}
+This is a special image processing technique which was later used as the preprocessing function for the dataset passed to the CNN to get a little bit better accuracy. We will first erode and dilate the given image and subtract the eroded image from the dilated which will result in an black and white image consists of edges in white and the background in black. This technique is useful for detecting the shape of the hand which is very crucial feature for the classifier model to consider and helps in making the model not focus on other parameters like color of the hand, background, etc. But the issue with this approach was that it still returned edges of other objects with the hands.
 
 \subsection{Using MediaPipe to get hand coordinates in the image and pass them to a neural network classifier to detect hand signs in the image}
 Perception of hand shape and motion may be a critical component in improving user experience across a wide range of technical disciplines and platforms. It can, for example, serve as the foundation for sign language comprehension and hand gesture control, as well as enabling the overlay of digital material and information on top of the actual environment in augmented reality. While it comes naturally to people, robust real-time hand perception is a difficult computer vision task because hands frequently occlude themselves or each other (e.g., finger/palm occlusions and handshakes) and lack high contrast patterns. MediaPipe Hands is a solution for high-fidelity hand and finger tracking. Machine learning (ML) is used to deduce 21 3D landmarks of a hand from a single shot. Whereas existing state-of-the-art algorithms for inference rely mostly on powerful desktop settings, our method provides real-time performance on a mobile phone and even scalable to several hands. MediaPipe development team anticipate that making this hand perception capabilities available to the broader research and development community will spark the creation of new applications and research fields. In this approach we passed the static image through a framework called MediaPipe created by google which can detect 21 3-dimensional landmarks of a hand in a given picture and get the landmarks of both hands. These landmarks of both the hands which are detected and given by MediaPipe are passed through a custom neural network classifier that predicts which character is being shown based on the hand coordinates given. Altough we first used 3-dimensional landmarks, at a later stage we started considering only 2-dimensional landmarks since the third dimension was redundant since hand shapes were all that mattered in ISL hand signs.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.3]{mediapipe.jpg}}
+	\caption{Mediapipe hand coordinates}
+	\label{Mediapipe}
+\end{figure}
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.5]{neural_network.png}}
+	\caption{Neural Network Architecture}
+	\label{Neural_net}
+\end{figure}
 
 \subsubsection{Transforming, translating and normalising the coordinates}
 Initially we weren't getting good accuracy with ISL hand signs in the image in the case of mediapipe based neural network classifier during runtime due to the following reasons:-
@@ -113,10 +148,7 @@ To address this issue we use the following formulae to transform and translate t
 	      \begin{equation}
 		      Normalised\ Value = \frac{|Scaled\ Value|}{100} \notag
 	      \end{equation}
-
-
 \end{itemize}
-
 
 \subsection{NLP}
 Our final output from the model will be one of the (26 letters + 10 numbers)36 characters or an "-"(nothing predicted in case the model's confidence rate is less than 95\%) as prediction from the model. But in realtime it will not just be one image but a stream of continuous frames and the raw output from the model will be concatenated to a string of characters altought "-" predictions are not concatenated. This string needs to be processed in order to make meaningful word or sentence. For processing the model's raw output string we introduced three approaches.
@@ -134,6 +166,11 @@ Lets just say the user tried to use the model to predict a sentence like "HOW AR
 
 \subsubsection{Frontend}
 Since our goal is for the chatbot to work as fast as possible, we went ahead and built the frontend without using any external frontend framework and just commonjs so that it works fast. We also made the code run as asynchronously as possible so that there wont be any blocking calls in code which take lot of time to resolve thus slowing down the whole chatbot process making it slower in predictions. In this way we made sure everything works as fast as possible from the frontend side so that the user can have a seamless UI experience. We capture the webcam feed of the user in the frontend and also predict if his hands are being shown in the image with the help of mediapipe framework and notify the user if his left hand, right hand or both are not visible in the feed additionally along with predicting characters so that the user can know if the model is able to detect his hand and change his background if his hands blend in the background or move his hand to a better position so that the hand is visible in the image.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.2]{ui.png}}
+	\caption{chatbot frontend}
+	\label{ui}
+\end{figure}
 
 \subsubsection{Backend}
 On the backend side, we used Golang for writing our http server. We went with golang since it is a compiled language and faster than python and javascript which are interpreted languages. We also did not want to go with java since JRE(Java Runtime Environment) is required for the build to work in this case and also java is slower than golang. Golang handled multitasking well using the concept of concurrency which is implemented by goroutines in golang. Golang is also really fast at handling streams and file descriptors which will be useful in our case since we send all the frames which we capture in the frontend to the backend. It also supports cross platform builds like java which is a huge advantage if we want to deploy out server in a windows machine at a later stage. Our runtime working neural network classifier which is a python based tensorflow model is loaded as the server starts so as to not waste any time during predictions. We also use the concept of mutex locks which enables one model to predict characters for many users. This can be a huge difference as it reduces the amount of hardware required as if there was one model per user, it would take lot of computational power.
@@ -166,9 +203,29 @@ We have used Categorical Cross entropy Loss function for the both the models to 
 
 \subsubsection{CNN model}
 Although the CNN model gave really high accuracy during training and testing, it couldn't not do the same in realtime with a webcam feed. Upon further research into why the model was failing, we found out that we had to do some kind of hand detection in the image since during realtime, the background is not plain all the time as it was in the training data. Also, we the hand might be closer or farther in the image making it bigger or smaller in the image respectively. Another reason is the relative positions of both hands with respect to each other during ISL hand signs as different people show hand signs in different relative hand positions. Also running a CNN model means that predictions are significantly slower as bit as resnet means that our predictions will gradually becomes slower which hinders our main objective which is to make predictions faster. Also complex ISL hand signs like "M" and "N" for example weren't being recoginzed at all. Since we had to address these many problems and also this slower predictions problem cannot be addressed in any way to make it faster we had to move away from this approach for predicting hand signs in the image.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.5]{cnn_accuracy.jpg}}
+	\caption{CNN model accuracy}
+	\label{Cnn_accuracy}
+\end{figure}
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.5]{cnn_loss.jpg}}
+	\caption{CNN model loss}
+	\label{Cnn_loss}
+\end{figure}
 
 \subsubsection{Mediapipe based neural network classifier model}
 THis model as usual gave really high accuracy during training and testing but failed to give the same during runtime initially. After further research into this, we found out that the dataset we were using hand pictures in which mediapipe couldn't detect the hands or detected them incorrectly in many cases which lead to bad training. But it started giving better accuracy once we used the new dataset to train the model. But this time the issue is that the ISL hand signs are classified correctly only if we put the hands at the same distance from the camera as we put during the making of dataset as putting it nearer or farther than necessary would make them big or small in the image respectively. We also had this problem of relative positions of hands which differs for each person due to their hand size. We had to address the hands sizes and relative positions in the image and we did that using the special preprocessing function which translates and transforms all the hand coordinates to a range between 0 and 1 and removes the relativeness between the position of two hands as we only needed to know the shapes of the two hands to predict the image. Using this preprocessing function we were able to get really high training and testing accuracy and it was able to detect the ISL hand signs in realtime with a live webcam feed. This model could detect all the 36 characters including the complex ones in realtime without any hassle. Most of all this model was fast in terms of predictions. Hence we had to go forward with this model architecture for our predictions on ISL hand signs in the image.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.15]{neural_network_accuracy.png}}
+	\caption{Neural Network model accuracy}
+	\label{Neural_net_accuracy}
+\end{figure}
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.15]{neural_network_loss.png}}
+	\caption{Neural Network model loss}
+	\label{Neural_net_loss}
+\end{figure}
 
 \chapter{Merits, Limitations and Future Scope}
 
@@ -236,6 +293,49 @@ To summarize, ISL sign language detection is a key challenge in the field of AI(
 \chapter{Source Code}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
