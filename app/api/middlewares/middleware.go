@@ -3,8 +3,10 @@ package middlewares
 import (
 	"fmt"
 	"fyp/router"
-	"github.com/google/uuid"
 	"net/http"
+	"time"
+
+	"github.com/google/uuid"
 )
 
 var middlewares map[string]router.Middleware
@@ -42,13 +44,15 @@ func init() {
 
 	middlewares["logger"] = func(next router.Controller) router.Controller {
 		return func(res http.ResponseWriter, req *http.Request) {
+			startTime := time.Now().UnixMilli()
 			cookie, err := req.Cookie("uuid")
-			if err != nil {
-				fmt.Println(req.Method, "\t", "Not Set", "\t", req.RemoteAddr, "\t", req.URL.Path)
-			} else {
-				fmt.Println(req.Method, "\t", cookie.Value, "\t", req.RemoteAddr, "\t", req.URL.Path)
-			}
 			next(res, req)
+			endTime := time.Now().UnixMilli()
+			if err != nil {
+				fmt.Println(req.Method, "\t", "Not Set", "\t", req.RemoteAddr, "\t", req.URL.Path, "\t", endTime-startTime)
+			} else {
+				fmt.Println(req.Method, "\t", cookie.Value, "\t", req.RemoteAddr, "\t", req.URL.Path, "\t", endTime-startTime)
+			}
 		}
 	}
 }
