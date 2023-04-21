@@ -37,20 +37,28 @@ Our problem statement is to basically create a chatbot which interacts with deaf
 In today's world, deaf and dumb people have a hard time communicating with others and this this becomes even more harder if it is a computer as the deaf and dumb person most likely does not know how to operate a computer and most of the services today like payments, purchasing and customer support are computerized making it a lot harder for them to use these services. Hence it becomes increasing difficult for dumb people to interact with the computer and to make things worse, they cannot use the customer support since they are dumb and deaf and have no way to converse with the support. Hence this project aims at creating a way for deaf and dumb people to converse with computers by using a common medium of ISL(Indian Sign Language).
 
 \section{Objectives}
-The main idea of the project is to create a web interface based chatbot where in we take webcam feed of the deaf and dumb user so that he can interact with the computer and show ISL hand signs which can be used to input text in input fields or select options for him in any forms or any kind of interface in the computer. Finally we also provide a NLP(Natural Language Processing) mechanism which can be used to add spaces to raw predictions which are words clubbed without spaces and spellcheck words. Finally we also address the problem of apture frames at a particular time interval in a loop and try to predict the hand signs which the user shows in the captured pictures. We can then try to apply spell checking and auto correction of the word entered using NLTK library which basically uses NLP(Natural Language Processing). In this way we create a interface for the user to interact with chat bots and select options by showing hand signs in ISL thus providing him with more options to converse with a computerized environment. So our basic aim is to take a static image as input and try to predict what ISL sign the user shows of the 36 possible characters(26 alphabets + 10 digits) and give that as output to the chat bot. We can further extend it by using NLTK library to spell check and auto correct spelling mistakes of the predictions to make them meaningful words which can be used to select options like countries, keywords, etc. Another constraint which we had to meet was to create a model which had to be very fast in terms of predictions which is also addressed in this project.
+The main objectives addressed in this project are:-
+\begin{itemize}
+	\item Create a web interface based chatbot where in we take webcam feed of the deaf and dumb user so that he can interact with the computer and show ISL hand signs which can be used to input text in input fields or select options for him in any forms or any kind of interface in the computer.
+	\item Provide a NLP(Natural Language Processing) mechanism which can be used to add spaces to raw predictions which are words clubbed without spaces and spellcheck words.
+	\item Make the chatbot scalable across for multiple users.
+	\item The architecture needs to be as fast and seamless as possible.
+\end{itemize}
 
 \section{Contribution}
-New architecture, Scaling, Fast web server, faster model a simple dataset
-\begin{equation}
-	Transformed\ Value = \frac{Actual\ Value - Min\ Value}{Max\ Value - Min\ Value} \notag
-\end{equation}
-\begin{equation}
-	Scaled\ Value = Transformed\ Value * 100 \notag
-\end{equation}
-\begin{equation}
-	Normalised\ Value = \frac{|Scaled\ Value|}{100} \notag
-\end{equation}
-These equation take care of the coordinates of two hands relative to each other. These just aligns the coordinates of the two hands with respect to the origin and brings all the coordinates to a range between 0 and 100 first. Then they reduces them to a range between 0 and 1 which is later used to train the model. This is equation boosted the accuracy of the ML Model's testing accuracy by a lot. The final value which is the Normalised Value is used by the neural network to train and predict ISL hand signs.
+Our contributions to this project are:-
+\begin{itemize}
+	\item 2 different models for predicting ISL hand signs in an image.
+	\item Special preprocessing function in case of CNN model for getting borders of image based on erosion and dialation.
+	\item Special preprocessing function in case of mediapipe based model for transforming and translating hand coordinates.
+	\item A Web UI based chatbot with frontend and backend for running the model.
+	\item NLP techniques for spellchecking and word segmentation for the chatbot.
+	\item OpenCV based UI for testing the model in realtime with webcam feed.
+	\item Scalable architecture for making the chatbot work for multiple users.
+\end{itemize}
+
+\section{Indian Sign Language}
+Indian Sign Language (ISL) is used in the deaf community all over India. It is a way of conversing with other people without speaking by showing hand signs which represent characters(alphabets or numbers). In the past years, there has been an increased interest among researchers in the field of sign language recognition. One of which is to introduce means of interaction from human to computer. Deaf and Dumb people generally rely on sign language interpreters for communication. Finding experienced and qualified interpreters for their daily communication throughout life is a very difficult task and also unaffordable. Hence, a human to computer interaction system will prove to be a reliable and consistent solution in the future for deaf and dumb people.The ISL has different hand sign for each character so that a person can show these hand signs to spell out the word they want to convey or the sentence they want to convey to others. Now this medium has been used by us in this project as a common medium between the user and computer for conversing since most of the deaf people generally use this sign language to converse with each other.
 
 \chapter{Models, Architecture and Proposed Frameworks}
 
@@ -74,7 +82,7 @@ This work enhanced keyframe centered clips (KCC) sampling to provide a new type 
 \section{Methodology, Architecture and Proposed Frameworks}
 
 \subsection{Architecture}
-
+When the user accesses the chatbot from the frontend, he provides the webcam feed to it in which he shows the hand sign. Now this frame is sent to the backend which then sends it to the python prediction model. When the model receives the image, it first extracts the hand coordinates from the image using mediapipe and then passes it to a special preprocessing function which translates and transforms the coordinates and sends to the the actual neural network classifier which then gives an output as to which character was shown in the image. Now this predicted character is passed back to the backend ny the python prediction model which then passes it to the frontend. If the user is inputting a word and he wants to correct the spelling, then we can enable spellchecking for that entered word to get it autocorrected. When spellchecking is enabled, the frontend will send the incorrect word to the backend which sends the incorrect word to the pyspellchecker based python NLP module which returns back the correct spelling to the backend which is then returned back to the frontend by the backend. In the same way, this also applies if we want word segmentation in case we are inputting sentences instead of words.
 
 \subsection{Using Inception-ResNet-v2 convolutional neural network (CNN) pre-trained model to detect hand signs in the image}
 Deep convolutional networks have been at the heart of the most significant breakthroughs in image recognition performance in recent years. The Inception design, for example, has been proven to deliver extremely excellent performance at a cheap computational cost. Recently, the use of residual connections in combination with a more conventional design produced state-of-the-art performance in the 2015 ILSVRC challenge, comparable to the current generation Inception-v3 network. This begs the issue of whether combining the Inception design with residual connections is beneficial. We show here that training using residual connections considerably speeds up the training of Inception networks. In addition, there is some evidence that residual Inception networks outperform comparably priced Inception networks without residual connections by a narrow margin. In addition, we offer various novel simplified designs for residual and non-residual Inception networks. The Inception-ResNet-v2 convolutional neural network was trained on over a million photos from the ImageNet collection. The network has 164 layers and can identify photos into 1000 item categories, including keyboards, mice, pencils, and a variety of animals. As a consequence, the network has learnt detailed feature representations for a diverse set of pictures. The network's picture input size is 299 by 299 pixels. In this approach a CNN model is trained specifically inceptionresnetv2 with the given dataset and the aim is to try to increase its accuracy by making minor tweaks to the model. After trying out many popular CNN classifiers like ShuffleNet and different versions of ResNet it turns out that InceptionResNet outperformed these models and gave good accuracy both in training and testing when compared to all other models. So basically in this architecture, we pass the image directly to the CNN and make it predict which character's ISL hand sign of the 36 characters is shown in the image and get the output.
@@ -140,7 +148,6 @@ Finally, we have to scale the chatbot so that it works for multiple users so tha
 \subsubsection{CNN model training methods}
 For the InceptionResNetV2 CNN model, we introduced hyper parameter tuning techniques like data augmentation, EarlyStopping, ReduceLROnPlateau, Class Balancing and custom data preprocessing which gave the best accuracy and improved the training process. We also tried changing with various neural network parameters like learning rate, batch size, optimizers, loss functions and no of epochs for best training results. We also tried the training with and without the erosion and dialation preprocessing function.
 
-
 \subsubsection{Mediapipe based neural network classifier model training methods}
 For this model, we tried changing experimenting with the neural network layers so as to finally land on the one model layer architecture which is the smallest, simple, easy to train and doesn't compromise on accuracy during training or testing time on a live webcam feed. We also tried training with various neural network parameters like learning rate, batch size, optimizers, loss functions and no of epochs for best training results. We also tried the training with and without the translation and transformation preprocessing function to check whether the accuracy is increasing or not.
 
@@ -150,7 +157,7 @@ For this model, we tried changing experimenting with the neural network layers s
 We had existing custom dataset which has average of 3000 images per class but has many problems such as imbalance in number of images per class which had led to good accuracy but low f1 score and missing digits (5 characters) out of 36 characters (26 alphabets and 10 digits) to solve these problems we had combine this data set with the popular ISL sign language data set from the Kaggle and did some data preprocessing to attain the balanced number of images per class. This dataset got good accuracy with both the CNN and mediapipe based neural network classifier models during training time. But during testing time, both the models performed badly since most of the images in the model were blurry and unclear. Also in the case of mediapipe based classifier, mediapipe couldn't detect the hands in some pictures while in some pictures, it detected the hands wrongly. This became a issue which haunts us during the testing phase with webcam feed.
 
 \subsubsection{Newer dataset}
-We created a custom dataset which stores 85(21*2(left hand) + 21*2(right hand) + 1(prediction)) values in a CSV(Comma Seperated Values) format. Each entry in it represents the hand coordinates and its respective prediction. Also note that these 84 coordinates are preprocessed using the special function to translate and transform hand coordinates before storing it in the file.
+We created a custom dataset which stores 85(21*2(left hand) + 21*2(right hand) + 1(prediction)) values in a CSV(Comma Seperated Values) format. Each entry in it represents the hand coordinates and its respective prediction. Also note that these 84 coordinates are preprocessed using the special function to translate and transform hand coordinates before storing it in the file. The newer dataset consists of a total of 720 samples with 20 samples represent each class.
 
 \subsection{Evaluation Metrics}
 We have used Categorical Cross entropy Loss function for the both the models to computes the cross-entropy loss between the labels and predictions. This loss function is frequently employed in multi-class classification models with two or more output labels. We used Adam as the optimizer function for both the models since that was giving the best result for both the training models. We evaluated the model based on training and testing accuracy graphs. We also tested the models in realtime with webcam feed to check its accuracy.
@@ -166,14 +173,35 @@ THis model as usual gave really high accuracy during training and testing but fa
 \chapter{Merits, Limitations and Future Scope}
 
 \section{Merits}
+The merits of this architecture are:-
+\begin{itemize}
+	\item Really fast in terms of predictions and can be scaled to multiple users as the whole chatbot is dockerised and multiple containers can be spawned from the docker image.
+	\item Also the final model used for predictions can be used to detect all ISL hand signs and it does that really fast.
+	\item It can also detect characters with very complex hand signs very easily.
+	\item Since we use a object detection framework like mediapipe, background color doesn't matter as long as mediapipe can detect the hands.
+	\item Also relative positions of both hands with respect to each other and the other problem where the hand becomes bigger when near the webcam and small when farther from the webcam was addressed with the special preprocessing function which translates and transforms the hand coordinates to remove these issues.
+	\item This whole architecture can be deployed on a normal server and still it can perform really well for multiple users upto a point because of the concept of multitasking implemented using goroutines and also the concept of mutex locks which allows the same model to be used by multiple users.
+\end{itemize}
 
 \section{Limitations}
+The limitations of this project are:-
+\begin{itemize}
+	\item The dataset used to train the model is really small. It only has 20 samples representing each class. Because of this if the user shows a particular hand sign in a totally different way than the ones used in the dataset, we will not be able to predict it correctly.
+	\item The dataset only consists of right handed samples. Left handed people presently cannot use this model for predictions. To do so they have to show the ISL hand signs as right handed people do.
+	\item The dataset only consists of samples whose hands are small but if a person's hand is really large, then even though its coordinates are scaled to a range between 0 to 1, sometimes the predictions are false positive.
+\end{itemize}
+
 
 \section{Future Scope}
-Throughout our research about how to approach this problem, we contributed things like a CNN model which has accuracy of 98 percentile for both training and testing for the given data set and also a neural network model which works on the coordinates obtained from mediapipe to give out predictions and this neural network gives an accuracy of 98 percentile for both testing and training. We also created a interface to test these models out in real time using Opencv. The limitations of the project include the fact that the CNN model is trained on a data set which has the hands as the main focus and the background is dark and mono coloured. Hence the CNN model does not work well when these conditions are not satisfied which lead to really less accuracy during deployment even though it gave really high testing accuracy on the data set. The model which uses Mediapipe has its limitations as well. Even though it detects most of the characters really well. It struggles to detect complex characters like M and N which a little bit similar to each other. It also mistakes digit 1 with character I since they have the same ISL sign but the later is shown in a slanted way. Also the neural network which we trained assumes the fact that the coordinates which it gets from Mediapipe are accurate but even Mediapipe gives wrong coordinates sometimes in certain conditions and the model does not predict anything if the Mediapipe cannot detect anything. To counter this problem we changed the min\_detection\_confidence parameter of the Mediapipe to a really high value so that it avoids false detection and only gives ones which it thinks are accurate. Another limitation is that even though Mediapipe does a really good job in detecting hands in varied environments, it still struggles in figuring out the hand coordinates in bright backgrounds and also in backgrounds where the hand color is nearly similar to the background.
+The future scope of this project is:-
+\begin{itemize}
+	\item The dataset used to train the working model is a really small dataset which only consists of 720 samples. Thus most of the limitations of this project are due to its small dataset size. If better dataset is used to train the model, We think it can become even more accurate at giving predictions in realtime with a webcam feed.
+	\item We can train the model with left handed samples so as to make it predict ISL hand signs for left handed people as well.
+	\item We can add a special custom hand sign for adding space in text so that word segmentation can be done even more accurately.
+\end{itemize}
 
 \chapter{Conclusion}
-To summarize, ISL sign language detection is a key challenge in the field of AI(Artificial Intelligence) and ML(Machine Learning). We approached this problem in our own way using static image sign language recognition. So we take in a static image as input and then use this image to predict what ISL hand sign is shown in the image using various approaches. In the first approach, we trained a existing InceptionResnetV2 CNN model to detect the hand signs and predict the character of the 36 characters represented by the hand sign in the input image. This model when trained on the data set gave a really high accuracy of 98 percentile for both testing and training but failed to produce the same results in real time when deployed as the images in the data set had the hands as the main focus with dark and mono coloured background. So to approach this problem of better hand detection which the CNN model could not do, we used Mediapipe framework by google for hand coordinates detection in the image and then passed these coordinates to a neural network which used these coordinates to make a prediction as to which character was shown by the ISL sign in the image. This way, since Mediapipe could detect hands in wide variety of backgrounds and at any location in the image even though it is not the main focus, we resolved the previous problem which the CNN model had thus detecting hand signs in a variety of positions and lighting and even if the background is not mono coloured. Hence the model with mediapipe gave a better accuracy when deployed and could detect most of the hand signs very easily. Another catch to the mediapipe model is that it is very fast since very less computation is done than the CNN model which results in faster predictions.
+To summarize, ISL sign language detection is a key challenge in the field of AI(Artificial Intelligence) and ML(Machine Learning). We approached this problem in our own way using static image sign language recognition. So we take in a static image as input and then use this image to predict what ISL hand sign is shown in the image using various approaches. In the first approach, we trained a existing InceptionResnetV2 CNN model to detect the hand signs and predict the character of the 36 characters represented by the hand sign in the input image. This model when trained on the data set gave a really high accuracy of 98 percentile for both testing and training but failed to produce the same results in real time when deployed as the images in the data set had the hands as the main focus with dark and mono coloured background Also hand detection was required which was not done in this model. Most of all this model is really slow which is the biggest problem. So to approach this problem of better hand detection which the CNN model could not do, we used Mediapipe framework by google for hand coordinates detection in the image and then passed these coordinates to a custom preprocessed function which transforms and translates these coordinates to a range between 0 and 1 such that the relativity of positions of both the hands with respect to one another is removed and only shapes are considered. Now these processed coordinates are then passed to a neural network which used these coordinates to make a prediction as to which character was shown by the ISL sign in the image. This way, since Mediapipe could detect hands in wide variety of backgrounds and at any location in the image even though it is not the main focus, we resolved the previous problem which the CNN model had thus detecting hand signs in a variety of positions and lighting and even if the background is not mono coloured. Hence the model with mediapipe gave a better accuracy when deployed and could detect most of the hand signs very easily. Another catch to the mediapipe model is that it is very fast since very less computation is done than the CNN model which results in faster predictions. Finally we processed the model raw output using a bunch of techinques like taking maximum frequency element in a given sample, spellchecking and word segmentation to get the final predicted text.
 
 \begin{thebibliography}{00}
 	\bibitem{b1} Sign Language Recognition for Static and Dynamic Gestures by Jay Suthar
@@ -208,6 +236,53 @@ To summarize, ISL sign language detection is a key challenge in the field of AI(
 \chapter{Source Code}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
