@@ -16,6 +16,13 @@
 \usepackage{url}
 \usepackage{algorithm}
 \usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=cyan
+}
 
 \begin{document}
 
@@ -200,6 +207,18 @@ We created a custom dataset which stores 85(21*2(left hand) + 21*2(right hand) +
 We have used Categorical Cross entropy Loss function for the both the models to computes the cross-entropy loss between the labels and predictions. This loss function is frequently employed in multi-class classification models with two or more output labels. We used Adam as the optimizer function for both the models since that was giving the best result for both the training models. We evaluated the model based on training and testing accuracy graphs. We also tested the models in realtime with webcam feed to check its accuracy.
 
 \subsection{Results}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ | c | c | c | c | }
+		\hline
+		Model                     & Accuracy & Loss  & Realtime \\
+		\hline
+		CNN                       & 99\%     & 0.1\% & Fails    \\
+		Neural Network Classifier & 99\%     & 0.1\% & Passes   \\
+		\hline
+	\end{tabular}
+	\caption{Model Comparision}
+\end{table}
 
 \subsubsection{CNN model}
 Although the CNN model gave really high accuracy during training and testing, it couldn't not do the same in realtime with a webcam feed. Upon further research into why the model was failing, we found out that we had to do some kind of hand detection in the image since during realtime, the background is not plain all the time as it was in the training data. Also, we the hand might be closer or farther in the image making it bigger or smaller in the image respectively. Another reason is the relative positions of both hands with respect to each other during ISL hand signs as different people show hand signs in different relative hand positions. Also running a CNN model means that predictions are significantly slower as bit as resnet means that our predictions will gradually becomes slower which hinders our main objective which is to make predictions faster. Also complex ISL hand signs like "M" and "N" for example weren't being recoginzed at all. Since we had to address these many problems and also this slower predictions problem cannot be addressed in any way to make it faster we had to move away from this approach for predicting hand signs in the image.
@@ -291,8 +310,38 @@ To summarize, ISL sign language detection is a key challenge in the field of AI(
 
 \appendix
 \chapter{Source Code}
+You can access the source code from this link: \url{https://www.github.com/231tr0n/fyp}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
