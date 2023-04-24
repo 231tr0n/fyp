@@ -71,6 +71,7 @@ const chatbot = function (params) {
 	const upload_delay = params.upload_delay;
 	const video_stream = params.video_stream;
 
+	let underscore_counter = 0;
 	let reply = true;
 	let interval = null;
 	const sample_size = 10;
@@ -94,6 +95,38 @@ const chatbot = function (params) {
 		}
 	};
 	text_predict();
+
+	document.getElementById('spell-check').onclick = () => {
+		const text = document.getElementById('predicted-text').innerText;
+		fetch('/spellcheck', {
+			method: 'POST',
+			mode: 'same-origin',
+			credentials: 'same-origin',
+			body: text
+		}).then((res) => res.text()).then((res) => {
+			document.getElementById('predicted-text').innerText = res.toUpperCase();
+		}).catch((error) => {
+			console.log(error);
+			alert('Fetch request failed. Press this button to reload.');
+			location.reload();
+		});
+	};
+
+	document.getElementById('word-segment').onclick = () => {
+		const text = document.getElementById('predicted-text').innerText;
+		fetch('/wordsegment', {
+			method: 'POST',
+			mode: 'same-origin',
+			credentials: 'same-origin',
+			body: text
+		}).then((res) => res.text()).then((res) => {
+			document.getElementById('predicted-text').innerText = res.toUpperCase().split(', ').join(' ');
+		}).catch((error) => {
+			console.log(error);
+			alert('Fetch request failed. Press this button to reload.');
+			location.reload();
+		});
+	};
 
 	document.getElementById('submit-output').onclick = () => {
 		bool = false;
@@ -163,6 +196,7 @@ const chatbot = function (params) {
 			if (answer.length == 1) {
 				document.getElementById('prediction').innerText = answer;
 				if (answer != '_' && bool) {
+					console.log('Predicted:', answer);
 					if (counter < sample_size) {
 						counter += 1;
 						if (json[answer]) {
@@ -180,8 +214,17 @@ const chatbot = function (params) {
 							}
 						}
 						document.getElementById('predicted-text').innerText += index;
+						console.log('predicted-text:', document.getElementById('predicted-text').innerText);
 						counter = 0;
 						json = {};
+					}
+				} else {
+					underscore_counter += 1;
+					if (underscore_counter >= 5) {
+						counter = 0;
+						json = {};
+						underscore_counter = 0;
+						console.log('Temp cleared');
 					}
 				}
 			}

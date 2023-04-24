@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name = "viewport" content = "width = device-width, initial-scale = 1">
-		<title>Soubhagya</title>
-		<link rel = "stylesheet" href = "/public/css/style.css">
-	</head>
-	<body>
-		<table style = 'background-color: #0b171e; border-spacing: 10px; border-radius: 10px; position: absolute; bottom: 1px; right: 1px;'>
-			<tr align = 'center' style = 'background-color: #293e49;'>
-				<td style = 'padding: 10px'><video id = 'video' style = 'border: 10px solid #2e7690; width: 320px; height: 240px;' autoplay muted></video></td>
-			</tr>
-			<tr style = 'display: block; height: 400px; width: 400px; overflow-y: scroll;' id = 'chat'></tr>
-			<tr align = 'center' style = 'background-color: #293e49;'>
-				<td style = 'padding: 10px; text-align: left; color: white;'>Predicted-Text: <span id = 'predicted-text'></span></td>
-			</tr>
-			<tr align = 'center' style = 'background-color: #293e49;'>
-				<td style = 'padding: 10px; text-align: left; color: white;'>Prediction: <span id = 'prediction'></span></td>
-			</tr>
-			<tr align = 'center' style = 'background-color: #293e49;'>
-				<td style = 'padding: 10px; color: white;'><button id = 'submit-output'>Submit</button></td>
-			</tr>
-		</table>
-		<canvas id = 'drawer' hidden></canvas>
-		<script src = '/public/js/script.js'></script>
-	</body>
+
+<head>
+  <meta name="viewport" content="width = device-width, initial-scale = 1">
+  <title>Soubhagya</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+  <table
+    style='background-color: #0b171e; border-spacing: 10px; border-radius: 10px; position: absolute; bottom: 1px; right: 1px;'>
+    <tr align='center' style='background-color: #293e49;'>
+      <td style='padding: 10px'><video id='video' style='border: 10px solid #2e7690; width: 320px; height: 240px;'
+          autoplay muted></video></td>
+    </tr>
+    <tr style='display: block; height: 400px; width: 400px; overflow-y: scroll;' id='chat'></tr>
+    <tr align='center' style='background-color: #293e49;'>
+      <td style='padding: 10px; text-align: left; color: white;'>Predicted-Text: <span id='predicted-text'></span></td>
+    </tr>
+    <tr align='center' style='background-color: #293e49;'>
+      <td style='padding: 10px; text-align: left; color: white;'>Prediction: <span id='prediction'></span></td>
+    </tr>
+    <tr align='center' style='background-color: #293e49;'>
+      <td style='padding: 10px; color: white;'>
+        <table cellspacing='3'>
+          <tr>
+            <td>
+              <button id='word-segment'>WordSegment</button>
+            </td>
+            <td>
+              <button id='submit-output'>Submit</button>
+            </td>
+            <td>
+              <button id='spell-check'>SpellCheck</button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <canvas id='drawer' hidden></canvas>
+  <script src='/public/js/script.js'></script>
+</body>
+
 </html>
