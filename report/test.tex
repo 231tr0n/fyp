@@ -29,7 +29,7 @@
 \renewcommand\bibname{References}
 
 \chapter*{Abstract}
-The whole aim of this project is to tackle the problem of communication between deaf and dumb people with computers using a standard sign language system called ISL(Indian Sign Language) as the common medium of communication on either side. This project can be used to assist them in conversing with computers in a better way by allowing them to use sign language to fill forms or input text in the computer. The project is basically a model which takes a static image input showing an ISL hand sign and tries to predict the characters which closely match the ISL signs shown in the static image by using Mediapipe and a neural network to classify the character shown in the image. This way we can predict characters and numbers which can be further passed through a NLP(Natural Language Processing) medium to tokenize the stream of characters into words and spellcheck each and every word to get the correct sentence which the user wants to interpret. This final sentence formed can be used to converse with a chat bot by selecting its options and entering text when required. We also created a model and its working architecture keeping in mind that the model and its architecture is very fast in terms of predictions and is fully scalable to serve a large number of users so that it can be deployed in real time as a chatbot interface to make it easy to access and use.
+The whole aim of this project is to tackle the problem of communication between hearing and speech impaired people with computers using a standard sign language system called ISL(Indian Sign Language) as the common medium of communication on either side. This project can be used to assist them in conversing with computers in a better way by allowing them to use sign language to fill forms or input text in the computer. The project is basically a model which takes a static image input showing an ISL hand sign and tries to predict the characters which closely match the ISL signs shown in the static image by using Mediapipe and a neural network to classify the character shown in the image. This way we can predict characters and numbers which can be further passed through a NLP(Natural Language Processing) medium to tokenize the stream of characters into words and spellcheck each and every word to get the correct sentence which the user wants to interpret. This final sentence formed can be used to converse with a chat bot by selecting its options and entering text when required. We also created a model and its working architecture keeping in mind that the model and its architecture is very fast in terms of predictions and is fully scalable to serve a large number of users so that it can be deployed in real time as a chatbot interface to make it easy to access and use.
 
 \tableofcontents
 \listoffigures
@@ -38,15 +38,15 @@ The whole aim of this project is to tackle the problem of communication between 
 \chapter{Introduction}
 
 \section{Problem Statement}
-Our problem statement is to basically create a chatbot which interacts with deaf and dumb people using a common medium as ISL(Indian Sign Language) so that the person can show ISL hand signs to enter text which can be used to fill forms or select options which provides them a better way to interact with the computer. We also have to address the problem of fast predictions and scaling of this chatbot to serve to multiple users at a time on a very light weight architecture.
+Our problem statement is to basically create a chatbot which interacts with hearing and speech impaired people using a common medium as ISL(Indian Sign Language) so that the person can show ISL hand signs to enter text which can be used to fill forms or select options which provides them a better way to interact with the computer. We also have to address the problem of fast predictions and scaling of this chatbot to serve to multiple users at a time on a very light weight architecture.
 
 \section{Motivation}
-In today's world, deaf and dumb people have a hard time communicating with others and this this becomes even more harder if it is a computer as the deaf and dumb person most likely does not know how to operate a computer and most of the services today like payments, purchasing and customer support are computerized making it a lot harder for them to use these services. Hence it becomes increasing difficult for dumb people to interact with the computer and to make things worse, they cannot use the customer support since they are dumb and deaf and have no way to converse with the support. Hence this project aims at creating a way for deaf and dumb people to converse with computers by using a common medium of ISL(Indian Sign Language).
+In today's world, hearing and speech impaired people have a hard time communicating with others and this this becomes even more harder if it is a computer as the hearing and speech impaired person most likely does not know how to operate a computer and most of the services today like payments, purchasing and customer support are computerized making it a lot harder for them to use these services. Hence it becomes increasing difficult for hearing and speech impaired people to interact with the computer and to make things worse, they cannot use the customer support since they are hearing and speech impaired due to which they do not have a way to converse with the support. Hence this project aims at creating a way for hearing and speech impaired people to converse with computers by using a common medium of ISL(Indian Sign Language).
 
 \section{Objectives}
 The main objectives addressed in this project are:-
 \begin{itemize}
-	\item Create a web interface based chatbot where in we take webcam feed of the deaf and dumb user so that he can interact with the computer and show ISL hand signs which can be used to input text in input fields or select options for him in any forms or any kind of interface in the computer.
+	\item Create a web interface based chatbot where in we take webcam feed of the hearing and speech impaired user so that he can interact with the computer and show ISL hand signs which can be used to input text in input fields or select options for him in any forms or any kind of interface in the computer.
 	\item Provide a NLP(Natural Language Processing) mechanism which can be used to add spaces to raw predictions which are words clubbed without spaces and spellcheck words.
 	\item Make the chatbot scalable across for multiple users.
 	\item The architecture needs to be as fast and seamless as possible.
@@ -56,7 +56,7 @@ The main objectives addressed in this project are:-
 Our contributions to this project are:-
 \begin{itemize}
 	\item 2 different models for predicting ISL hand signs in an image.
-	\item Special preprocessing function in case of CNN model for getting borders of image based on erosion and dialation.
+	\item Special preprocessing function in case of CNN model for getting borders of image based on erosion and dilation.
 	\item Special preprocessing function in case of mediapipe based model for transforming and translating hand coordinates.
 	\item A Web UI based chatbot with frontend and backend for running the model.
 	\item NLP techniques for spellchecking and word segmentation for the chatbot.
@@ -65,7 +65,7 @@ Our contributions to this project are:-
 \end{itemize}
 
 \section{Indian Sign Language}
-Indian Sign Language (ISL) is used in the deaf community all over India. It is a way of conversing with other people without speaking by showing hand signs which represent characters(alphabets or numbers). In the past years, there has been an increased interest among researchers in the field of sign language recognition. One of which is to introduce means of interaction from human to computer. Deaf and Dumb people generally rely on sign language interpreters for communication. Finding experienced and qualified interpreters for their daily communication throughout life is a very difficult task and also unaffordable. Hence, a human to computer interaction system will prove to be a reliable and consistent solution in the future for deaf and dumb people.The ISL has different hand sign for each character so that a person can show these hand signs to spell out the word they want to convey or the sentence they want to convey to others. Now this medium has been used by us in this project as a common medium between the user and computer for conversing since most of the deaf people generally use this sign language to converse with each other.
+Indian Sign Language (ISL) is used in the hearing and speech impaired community all over India. It is a way of conversing with other people without speaking by showing hand signs which represent characters(alphabets or numbers). In the past years, there has been an increased interest among researchers in the field of sign language recognition. One of which is to introduce means of interaction from human to computer. hearing and speech impaired people generally rely on sign language interpreters for communication. Finding experienced and qualified interpreters for their daily communication throughout life is a very difficult task and also unaffordable. Hence, a human to computer interaction system will prove to be a reliable and consistent solution in the future for hearing and speech impaired people.The ISL has different hand sign for each character so that a person can show these hand signs to spell out the word they want to convey or the sentence they want to convey to others. Now this medium has been used by us in this project as a common medium between the user and computer for conversing since most of the speech impaired people generally use this sign language to converse with each other.
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=1]{isl.png}}
 	\caption{ISL Hand Signs}
@@ -114,11 +114,11 @@ When the user accesses the chatbot from the frontend, he provides the webcam fee
 \end{figure}
 Deep convolutional networks have been at the heart of the most significant breakthroughs in image recognition performance in recent years. The Inception design, for example, has been proven to deliver extremely excellent performance at a cheap computational cost. Recently, the use of residual connections in combination with a more conventional design produced state-of-the-art performance in the 2015 ILSVRC challenge, comparable to the current generation Inception-v3 network. This begs the issue of whether combining the Inception design with residual connections is beneficial. We show here that training using residual connections considerably speeds up the training of Inception networks. In addition, there is some evidence that residual Inception networks outperform comparably priced Inception networks without residual connections by a narrow margin. In addition, we offer various novel simplified designs for residual and non-residual Inception networks. The Inception-ResNet-v2 convolutional neural network was trained on over a million photos from the ImageNet collection. The network has 164 layers and can identify photos into 1000 item categories, including keyboards, mice, pencils, and a variety of animals. As a consequence, the network has learnt detailed feature representations for a diverse set of pictures. The network's picture input size is 299 by 299 pixels. In this approach a CNN model is trained specifically inceptionresnetv2 with the given dataset and the aim is to try to increase its accuracy by making minor tweaks to the model. After trying out many popular CNN classifiers like ShuffleNet and different versions of ResNet it turns out that InceptionResNet outperformed these models and gave good accuracy both in training and testing when compared to all other models. So basically in this architecture, we pass the image directly to the CNN and make it predict which character's ISL hand sign of the 36 characters is shown in the image and get the output.
 
-\subsubsection{Using erosion and dialation to get all the borders in the picture}
+\subsubsection{Using erosion and dilation to get all the borders in the picture}
 \begin{figure}[htbp]
-	\centerline{\includegraphics[scale=0.5]{erosion_dialation.jpg}}
-	\caption{Erosion and Dialation of a image}
-	\label{Erosion_dialation}
+	\centerline{\includegraphics[scale=0.5]{erosion_dilation.jpg}}
+	\caption{Erosion and Dilation of a image}
+	\label{Erosion_dilation}
 \end{figure}
 This is a special image processing technique which was later used as the preprocessing function for the dataset passed to the CNN to get a little bit better accuracy. We will first erode and dilate the given image and subtract the eroded image from the dilated which will result in an black and white image consists of edges in white and the background in black. This technique is useful for detecting the shape of the hand which is very crucial feature for the classifier model to consider and helps in making the model not focus on other parameters like color of the hand, background, etc. But the issue with this approach was that it still returned edges of other objects with the hands.
 
@@ -190,7 +190,7 @@ Finally, we have to scale the chatbot so that it works for multiple users so tha
 \subsection{Experimentation Environment}
 
 \subsubsection{CNN model training methods}
-For the InceptionResNetV2 CNN model, we introduced hyper parameter tuning techniques like data augmentation, EarlyStopping, ReduceLROnPlateau, Class Balancing and custom data preprocessing which gave the best accuracy and improved the training process. We also tried changing with various neural network parameters like learning rate, batch size, optimizers, loss functions and no of epochs for best training results. We also tried the training with and without the erosion and dialation preprocessing function.
+For the InceptionResNetV2 CNN model, we introduced hyper parameter tuning techniques like data augmentation, EarlyStopping, ReduceLROnPlateau, Class Balancing and custom data preprocessing which gave the best accuracy and improved the training process. We also tried changing with various neural network parameters like learning rate, batch size, optimizers, loss functions and no of epochs for best training results. We also tried the training with and without the erosion and dilation preprocessing function.
 
 \subsubsection{Mediapipe based neural network classifier model training methods}
 For this model, we tried changing experimenting with the neural network layers so as to finally land on the one model layer architecture which is the smallest, simple, easy to train and doesn't compromise on accuracy during training or testing time on a live webcam feed. We also tried training with various neural network parameters like learning rate, batch size, optimizers, loss functions and no of epochs for best training results. We also tried the training with and without the translation and transformation preprocessing function to check whether the accuracy is increasing or not.
@@ -346,6 +346,13 @@ To summarize, ISL sign language detection is a key challenge in the field of AI(
 You can access the source code from this link: \url{https://www.github.com/231tr0n/fyp}
 
 \end{document}
+
+
+
+
+
+
+
 
 
 
