@@ -214,10 +214,26 @@ We have used Categorical Cross entropy Loss function for the both the models to 
 		Model                     & Accuracy & Loss  & Realtime \\
 		\hline
 		CNN                       & 99\%     & 0.1\% & Fails    \\
+		\hline
 		Neural Network Classifier & 99\%     & 0.1\% & Passes   \\
 		\hline
 	\end{tabular}
 	\caption{Model Comparision}
+	\label{Model_stats}
+\end{table}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ | p{1in} | p{1in} | p{1.2in} | p{1in} | }
+		\hline
+		Model          & Actual                                                     & Input                                                                             & Output                                                                       \\
+		\hline
+		pyspellchecker & HI HOW ARE YOU I AM DOING FINE IS SRIKAR THERE IN HIS ROOM & HIHOWARE\newline YOUIAMDOING\newline FINEISSRIKAR\newline THEREINHIS\newline HOME & HI HOW ARE YOU I AM DOING FINE IS \textcolor{red}{SRI KART HERE} IN HIS HOME \\
+		\hline
+		wordsegment    & CUT or CUB                                                 & CU\textcolor{red}{V}                                                              & CUT                                                                          \\
+		\hline
+	\end{tabular}
+	\caption{NLP Results}
+	\label{NLP_stats}
 \end{table}
 
 \subsubsection{CNN model}
@@ -234,7 +250,7 @@ Although the CNN model gave really high accuracy during training and testing, it
 \end{figure}
 
 \subsubsection{Mediapipe based neural network classifier model}
-THis model as usual gave really high accuracy during training and testing but failed to give the same during runtime initially. After further research into this, we found out that the dataset we were using hand pictures in which mediapipe couldn't detect the hands or detected them incorrectly in many cases which lead to bad training. But it started giving better accuracy once we used the new dataset to train the model. But this time the issue is that the ISL hand signs are classified correctly only if we put the hands at the same distance from the camera as we put during the making of dataset as putting it nearer or farther than necessary would make them big or small in the image respectively. We also had this problem of relative positions of hands which differs for each person due to their hand size. We had to address the hands sizes and relative positions in the image and we did that using the special preprocessing function which translates and transforms all the hand coordinates to a range between 0 and 1 and removes the relativeness between the position of two hands as we only needed to know the shapes of the two hands to predict the image. Using this preprocessing function we were able to get really high training and testing accuracy and it was able to detect the ISL hand signs in realtime with a live webcam feed. This model could detect all the 36 characters including the complex ones in realtime without any hassle. Most of all this model was fast in terms of predictions. Hence we had to go forward with this model architecture for our predictions on ISL hand signs in the image.
+This model as usual gave really high accuracy during training and testing but failed to give the same during runtime initially. After further research into this, we found out that the dataset we were using hand pictures in which mediapipe couldn't detect the hands or detected them incorrectly in many cases which lead to bad training. But it started giving better accuracy once we used the new dataset to train the model. But this time the issue is that the ISL hand signs are classified correctly only if we put the hands at the same distance from the camera as we put during the making of dataset as putting it nearer or farther than necessary would make them big or small in the image respectively. We also had this problem of relative positions of hands which differs for each person due to their hand size. We had to address the hands sizes and relative positions in the image and we did that using the special preprocessing function which translates and transforms all the hand coordinates to a range between 0 and 1 and removes the relativeness between the position of two hands as we only needed to know the shapes of the two hands to predict the image. Using this preprocessing function we were able to get really high training and testing accuracy and it was able to detect the ISL hand signs in realtime with a live webcam feed. This model could detect all the 36 characters including the complex ones in realtime without any hassle. Most of all this model was fast in terms of predictions. Hence we had to go forward with this model architecture for our predictions on ISL hand signs in the image.
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.15]{neural_network_accuracy.png}}
 	\caption{Neural Network model accuracy}
@@ -245,6 +261,23 @@ THis model as usual gave really high accuracy during training and testing but fa
 	\caption{Neural Network model loss}
 	\label{Neural_net_loss}
 \end{figure}
+
+\subsubsection{NLP Word Segmentation}
+The wordsegment python module worked great for basic words but it could not handle any kind of nouns as in the below example. Hence we can conclude that it works perfectly on words in dictionary but not on nouns.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.25]{word_segment.png}}
+	\caption{NLP Word segmentation module results}
+	\label{Word_segment}
+\end{figure}
+
+\subsubsection{NLP Spell Checking}
+The pyspellchecker python module worked great at correcting words at an edit distance of two but the issue that comes with is that if one wrong spelled group of letters can have many different correct words. For an example, let us take the group of letters in \ref{Spell_check}. Now the group of letters "CUV" can mean the word "CUB" or "CUT" but since the word "CUT" is more closer to "CUV" in terms of edit distance, it took this word instead of the word "CUB".
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.4]{spell_check.png}}
+	\caption{NLP Spell checking module results}
+	\label{Spell_check}
+\end{figure}
+
 
 \chapter{Merits, Limitations and Future Scope}
 
@@ -313,6 +346,36 @@ To summarize, ISL sign language detection is a key challenge in the field of AI(
 You can access the source code from this link: \url{https://www.github.com/231tr0n/fyp}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
