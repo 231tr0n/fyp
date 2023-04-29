@@ -31,7 +31,13 @@
 \chapter*{Abstract}
 The whole aim of this project is to tackle the problem of communication between hearing and speech impaired people with computers using a standard sign language system called ISL(Indian Sign Language) as the common medium of communication on either side. This project can be used to assist them in conversing with computers in a better way by allowing them to use sign language to fill forms or input text in the computer. The project is basically a model which takes a static image input showing an ISL hand sign and tries to predict the characters which closely match the ISL signs shown in the static image by using Mediapipe and a neural network to classify the character shown in the image. This way we can predict characters and numbers which can be further passed through a NLP(Natural Language Processing) medium to tokenize the stream of characters into words and spellcheck each and every word to get the correct sentence which the user wants to interpret. This final sentence formed can be used to converse with a chat bot by selecting its options and entering text when required. We also created a model and its working architecture keeping in mind that the model and its architecture is very fast in terms of predictions and is fully scalable to serve a large number of users so that it can be deployed in real time as a chatbot interface to make it easy to access and use.
 
-\chapter*{Indian Sign Language}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\chapter{Introduction}
+
+\section{Indian Sign Language}
 Indian Sign Language (ISL) is used in the hearing and speech impaired community all over India. It is a way of conversing with other people without speaking by showing hand signs which represent characters(alphabets or numbers). In the past years, there has been an increased interest among researchers in the field of sign language recognition. One of which is to introduce means of interaction from human to computer. hearing and speech impaired people generally rely on sign language interpreters for communication. Finding experienced and qualified interpreters for their daily communication throughout life is a very difficult task and also unaffordable. Hence, a human to computer interaction system will prove to be a reliable and consistent solution in the future for hearing and speech impaired people.The ISL has different hand sign for each character so that a person can show these hand signs to spell out the word they want to convey or the sentence they want to convey to others. Now this medium has been used by us in this project as a common medium between the user and computer for conversing since most of the speech impaired people generally use this sign language to converse with each other.
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=1]{isl.png}}
@@ -44,14 +50,9 @@ Indian Sign Language (ISL) is used in the hearing and speech impaired community 
 	\label{Isl0}
 \end{figure}
 
-\tableofcontents
-\listoffigures
-\listoftables
-
-\chapter{Introduction}
-
 \section{Motivation}
-In today's world, hearing and speech impaired people have a hard time communicating with others and this this becomes even more harder if it is a computer as the hearing and speech impaired person most likely does not know how to operate a computer and most of the services today like payments, purchasing and customer support are computerized making it a lot harder for them to use these services. Hence it becomes increasing difficult for hearing and speech impaired people to interact with the computer and to make things worse, they cannot use the customer support since they are hearing and speech impaired due to which they do not have a way to converse with the support. Hence this project aims at creating a way for hearing and speech impaired people to converse with computers by using a common medium of ISL(Indian Sign Language).
+In today's world, hearing and speech impaired people have a hard time communicating with others and this this becomes even more harder if it is a computer as the hearing and speech impaired person most likely does not know how to operate a computer and most of the services today like payments, purchasing and customer support are computerized making it a lot harder for them to use these services. Hence it becomes increasing difficult for hearing and speech impaired people to interact with the computer and to make things worse, they cannot use the customer support since they are hearing and speech impaired due to which they do not have a way to converse with the support. There is a need for a chatbot that can effectively communicate with hearing and speech impaired individuals using Indian Sign Language (ISL) as the common medium which assists them in filling forms and providing input to the computer. The lack of communication channels for the hearing and speech impaired community make it challenging for them to access technology and fill out online forms, which can be a major hindrance in their daily lives. Hence this project aims at creating a way for hearing and speech impaired people to converse with computers by using a common medium of ISL(Indian Sign Language).
+
 
 \section{Problem Statement}
 Our problem statement is to basically create a chatbot which interacts with hearing and speech impaired people using a common medium as ISL(Indian Sign Language) so that the person can show ISL hand signs to enter text which can be used to fill forms or select options which provides them a better way to interact with the computer. We also have to address the problem of fast predictions and scaling of this chatbot to serve to multiple users at a time on a very light weight architecture.
@@ -346,6 +347,10 @@ To summarize, ISL sign language detection is a key challenge in the field of AI(
 You can access the source code from this link: \url{https://www.github.com/231tr0n/fyp}
 
 \end{document}
+
+
+
+
 
 
 
