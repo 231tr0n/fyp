@@ -7,10 +7,10 @@ pacman -Syu go --noconfirm
 pacman -Syu python --noconfirm
 pacman -Syu python-pip --noconfirm
 pacman -Syu libgl --noconfirm
-pip install tensorflow
+pacman -Syu tensorflow --noconfirm
+pacman -Syu python-tensorflow --noconfirm
 pip install opencv-python
 pip install mediapipe
-pip install numpy
 pip install pyspellchecker 
 pip install wordsegment
 ```
