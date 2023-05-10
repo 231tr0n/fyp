@@ -17,11 +17,12 @@
 \usepackage{algorithm}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{subfigure}
 \hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    filecolor=black,
-    urlcolor=cyan
+  colorlinks=true,
+  linkcolor=black,
+  filecolor=black,
+  urlcolor=cyan
 }
 
 \begin{document}
@@ -29,7 +30,7 @@
 \renewcommand\bibname{References}
 
 \chapter*{Abstract}
-The whole aim of this project is to tackle the problem of communication between hearing and speech impaired people with computers using a standard sign language system called ISL(Indian Sign Language) as the common medium of communication on either side. This project can be used to assist them in conversing with computers in a better way by allowing them to use sign language to fill forms or input text in the computer. The project is basically a model which takes a static image input showing an ISL hand sign and tries to predict the characters which closely match the ISL signs shown in the static image by using Mediapipe and a neural network to classify the character shown in the image. This way we can predict characters and numbers which can be further passed through a NLP(Natural Language Processing) medium to tokenize the stream of characters into words and spellcheck each and every word to get the correct sentence which the user wants to interpret. This final sentence formed can be used to converse with a chat bot by selecting its options and entering text when required. We also created a model and its working architecture keeping in mind that the model and its architecture is very fast in terms of predictions and is fully scalable to serve a large number of users so that it can be deployed in real time as a chatbot interface to make it easy to access and use.
+Today, hearing and speech impaired people cannot interact with the computer since they cannot see the screen nor hear what it says via speakers thus having no way of interacting with the computer to do basic things like filling forms and entering input in a computer. There is a need for a chatbot that can effectively communicate with hearing and speech impaired individuals using Indian Sign Language(ISL) as the common medium which assists them in filling forms and providing input to the computer. Hence, by working on this project we aim to tackle the problem of communication between hearing and speech impaired people with computers using a standard sign language system called ISL(Indian Sign Language) as the common medium of communication on either side. ISL is a method of representing alphabets and numbers using hand signs. This is used as a medium between hearing and speech impaired people to communicate with each other. This project can be used to assist them in conversing with computers in a better way by allowing them to use sign language to fill forms or input text in the computer. The project is basically a model which takes a static image input showing an ISL hand sign and tries to predict the characters which closely match the ISL signs shown in the static image by using Mediapipe and a neural network to classify the character shown in the image. This way we can predict characters and numbers which can be further passed through a NLP(Natural Language Processing) medium to tokenize the stream of characters into words and spellcheck each and every word to get the correct sentence which the user wants to interpret. This final sentence formed can be used to converse with a chat bot by selecting its options and entering text when required. We also created a model and its working architecture keeping in mind that the model and its architecture is very fast in terms of predictions and is fully scalable to serve a large number of users so that it can be deployed in real time as a chatbot interface to make it easy to access and use. By working on this project we tackled a lot of challenges like a light and fast model for hand sign detection, processing raw model output into meaningful text, handling different backgrounds in webcam feeds and movement epenthesis. 
 
 \tableofcontents
 \listoffigures
@@ -40,14 +41,14 @@ The whole aim of this project is to tackle the problem of communication between 
 \section{Indian Sign Language}
 Indian Sign Language (ISL) is used in the hearing and speech impaired community all over India. It is a way of conversing with other people without speaking by showing hand signs which represent characters(alphabets or numbers). In the past years, there has been an increased interest among researchers in the field of sign language recognition. One of which is to introduce means of interaction from human to computer. hearing and speech impaired people generally rely on sign language interpreters for communication. Finding experienced and qualified interpreters for their daily communication throughout life is a very difficult task and also unaffordable. Hence, a human to computer interaction system will prove to be a reliable and consistent solution in the future for hearing and speech impaired people.The ISL has different hand sign for each character so that a person can show these hand signs to spell out the word they want to convey or the sentence they want to convey to others. Now this medium has been used by us in this project as a common medium between the user and computer for conversing since most of the speech impaired people generally use this sign language to converse with each other.
 \begin{figure}[htbp]
-	\centerline{\includegraphics[scale=1]{isl.png}}
-	\caption{ISL Hand Signs}
-	\label{Isl}
-\end{figure}
-\begin{figure}[htbp]
-	\centerline{\includegraphics[scale=1]{isl_0.png}}
-	\caption{ISL Hand Sign for 0}
-	\label{Isl0}
+  \hfill
+  \subfigure[ISL Hand Signs from A to Z and 1 to 9]{\includegraphics[scale=0.8]{isl.png}}
+  \hfill
+  \subfigure[ISL hand sign of 0]{\includegraphics[scale=1]{isl_0.png}}
+  \hfill
+  \break
+  \caption{ISL Hand Signs}
+  \label{Isl}
 \end{figure}
 
 \section{Motivation}
@@ -55,9 +56,19 @@ In today's world, hearing and speech impaired people have a hard time communicat
 
 
 \section{Problem Statement}
-Our problem statement is to basically create a chatbot which interacts with hearing and speech impaired people using a common medium as ISL(Indian Sign Language) so that the person can show ISL hand signs to enter text which can be used to fill forms or select options which provides them a better way to interact with the computer. We also have to address the problem of fast predictions and scaling of this chatbot to serve to multiple users at a time on a very light weight architecture.
+Our problem statement is to basically create a chatbot which interacts with hearing and speech impaired people using a common medium as ISL(Indian Sign Language) so that the person can show ISL hand signs to enter text which can be used to fill forms or select options which provides them a better way to interact with the computer. We also have to address the problem of fast predictions and scaling of this chatbot to serve to multiple users at a time on a very light weight architecture. While working on this project we are going to tackle the following challenges:-
+\begin{itemize}
+  \item Detect ISL hand signs for all 36 characters(26 alphabets + 10 numbers).
+  \item Provide methods to process raw model output into meaningful sentences or text.
+  \item Handle different backgrounds in the webcam feed.
+  \item The model must detect the hand sign in the image really fast.
+  \item The whole architecture must be scalable to serve multiple users.
+  \item Tackle the problem of movement epenthesis.
+  \item Tackle the problem of different signers showing signs.
+\end{itemize}
 
 \section{Objectives}
+Hearing and speech impaired people cannot interact with computer to fill forms and input text if they do not know how to operate a computer. Hence with this project, we aim at providing a solution for this problem by creating a chatbot which can assist them in ISL to fill forms and input text. This way an impaired person can use ISL which he is comfortable with to interact with the computer and fill forms and input text thus solving their problem of active interaction with the computer. 
 The main objectives addressed in this project are:-
 \begin{itemize}
 	\item Create a web interface based chatbot where in we take webcam feed of the hearing and speech impaired user so that he can interact with the computer and show ISL hand signs which can be used to input text in input fields or select options for him in any forms or any kind of interface in the computer.
@@ -69,7 +80,7 @@ The main objectives addressed in this project are:-
 \section{Contribution}
 Our contributions to this project are:-
 \begin{itemize}
-	\item 2 different models for predicting ISL hand signs in an image.
+	\item 2 different models namely CNN based and Mediapipe classifier based models for predicting ISL hand signs in an image.
 	\item Special preprocessing function in case of CNN model for getting borders of image based on erosion and dilation.
 	\item Special preprocessing function in case of mediapipe based model for transforming and translating hand coordinates.
 	\item A Web UI based chatbot with frontend and backend for running the model.
@@ -98,6 +109,7 @@ The paper goes into detail about the various types of "automatic sign converter 
 This work enhanced keyframe centered clips (KCC) sampling to provide a new type of sampling approach known as optimized keyframe-centered clips (OptimKCC) sampling for selecting important actions from sign language films. To characterize the video clips, they created a new type of skeletal feature called Multi-Plane Vector Relation (MPVR). Finally, they integrated the attention mechanism with extracted vector attention-based networks to distribute weights to temporal and spatial information taken from skeletal data. They also carried out comparative studies on their own and the public sign language dataset under Signer-Independent and Signer-Dependent conditions to demonstrate the benefits of our approaches.
 
 \section{Methodology, Architecture and Proposed Frameworks}
+This section helps us understand about the architecture of the chatbot and different frameworks, models and preprocessing functions used in it. This gives us an insight on how the chatbot works as a whole and goes into detail about each and every part of the chatbot.
 
 \subsection{Architecture}
 \begin{figure}[htbp]
@@ -147,28 +159,46 @@ To address this issue we use the following formulae to transform and translate t
 	\item This equation is applied on the coordinates of each hand seperately so as to translate and transform it to a range between 0 to 100 regardless of it previous position. This ensures that the hand is of same size even if it is bigger or smaller in the image. It also removes the relativity of positions between both the hands since all we need to consider are the hands shapes and not their positions with respect to each other.
 	      \begin{equation}
 		      Transformed\ Value = \frac{Actual\ Value - Min\ Value}{Max\ Value - Min\ Value} \notag
+          \label{Transformation}
 	      \end{equation}
 	\item This equation is applied on the coordinates of both hands to bring them to a range between 0 and 100. This is just an intermediate step which is done to remove extra decimal points and is the first step of normalisation.
 	      \begin{equation}
 		      Scaled\ Value = Transformed\ Value * 100 \notag
+          \label{Scaling}
 	      \end{equation}
 	\item This equation is applied to remove decimal points from the coordinates of both hands in a range between 0 and 100 and bring them back to a range between 0 and 1. This effectively makes sure that only 2 decimal points are there in all coordinates before passing them to the neural network. This is the second step of normalisation.
 	      \begin{equation}
 		      Normalised\ Value = \frac{|Scaled\ Value|}{100} \notag
+          \label{Descaling}
 	      \end{equation}
 \end{itemize}
 
-\subsection{NLP}
+\subsection{NLP based post processing}
 Our final output from the model will be one of the (26 letters + 10 numbers)36 characters or an "-"(nothing predicted in case the model's confidence rate is less than 95\%) as prediction from the model. But in realtime it will not just be one image but a stream of continuous frames and the raw output from the model will be concatenated to a string of characters altought "-" predictions are not concatenated. This string needs to be processed in order to make meaningful word or sentence. For processing the model's raw output string we introduced three approaches.
+\begin{itemize}
+  \item Taking the element with maximum frequency across some samples.
+  \item SpellChecking.
+  \item Word Segmentation.
+\end{itemize}
 
 \subsubsection{Taking the element with maximum frequency across some samples}
 So the output we deal with will be something like "CCCCAACCAA" if we are trying to show a the ISL hand sign for the character "C" for 10 frames with some misclassifications. To address this issue, we take a sample size of 10 by default and for every ten frames from the webcam we get the predictions string for 10 characters from the model and then only take the maximum occurring character in the ten frames which is predicted by the model as the character which the user wanted to convey. For better understanding let us take the sample string "CCCCAACCAA" for reference from above, since "C" is the maximum occuring character, that is taken as the input character which the user wanted to convey. In this way we try to reduce error in predictions and finally all the predictions here are appended to a string which will undergo further NLP processing.
 
 \subsubsection{Spellchecking}
-Lets just say the user tried to predict the word "CAB" but it turned out to be "CLB". In that case we use a spellchecking module in python called "pyspellchecker" module which uses to NLP technique to correct this word to "CAB". The NLP technique it uses is Levenshtein Distance algorithm. It uses this algorithm to find the permutations within edit distance of 2 from the original word. Simply said, it can correct words which have about 2 characters wrong in its spelling to right ones. This way we can correct spelling mistakes in the word so that the actual word can be used as input.
+Lets just say the user tried to predict the word "CAB" but it turned out to be "CLB". In that case we use a spellchecking module in python called "pyspellchecker" module which uses to NLP technique to correct this word to "CAB". The NLP technique it uses is Levenshtein Distance algorithm. It uses this algorithm to find the permutations within edit distance of 2 from the original word. Simply said, it can correct words which have about 2 characters wrong in its spelling to right ones. This way we can correct spelling mistakes in the word so that the actual word can be used as input. You can see the working example of this post processing in \ref{Spell_check}.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.4]{spell_check.png}}
+	\caption{NLP Spell checking module results}
+	\label{Spell_check}
+\end{figure}
 
 \subsubsection{Word Segmentation}
-Lets just say the user tried to use the model to predict a sentence like "HOW ARE YOU". The model's output will be something like "HOWAREYOU". Essentially speaking there are no spaces here since ISL has so sign for a space character which is a special character. So we used another python based NLP module called "wordsegment" which essentially uses words from Google Web Trillion Word Corpus data which are the most common words to segment words in a sentence. Simply said it can seperate words which are clubbed in a sentence without spaces as long as they are within its dataset of the most commonly used words.
+Lets just say the user tried to use the model to predict a sentence like "HOW ARE YOU". The model's output will be something like "HOWAREYOU". Essentially speaking there are no spaces here since ISL has so sign for a space character which is a special character. So we used another python based NLP module called "wordsegment" which essentially uses words from Google Web Trillion Word Corpus data which are the most common words to segment words in a sentence. Simply said it can seperate words which are clubbed in a sentence without spaces as long as they are within its dataset of the most commonly used words. You can see the working example of this post processing in \ref{Word_segment}.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.25]{word_segment.png}}
+	\caption{NLP Word segmentation module results}
+	\label{Word_segment}
+\end{figure}
 
 \subsection{Chatbot}
 
@@ -184,7 +214,12 @@ Since our goal is for the chatbot to work as fast as possible, we went ahead and
 On the backend side, we used Golang for writing our http server. We went with golang since it is a compiled language and faster than python and javascript which are interpreted languages. We also did not want to go with java since JRE(Java Runtime Environment) is required for the build to work in this case and also java is slower than golang. Golang handled multitasking well using the concept of concurrency which is implemented by goroutines in golang. Golang is also really fast at handling streams and file descriptors which will be useful in our case since we send all the frames which we capture in the frontend to the backend. It also supports cross platform builds like java which is a huge advantage if we want to deploy out server in a windows machine at a later stage. Our runtime working neural network classifier which is a python based tensorflow model is loaded as the server starts so as to not waste any time during predictions. We also use the concept of mutex locks which enables one model to predict characters for many users. This can be a huge difference as it reduces the amount of hardware required as if there was one model per user, it would take lot of computational power.
 
 \subsubsection{Scaling the chatbot to serve for multiple users}
-Finally, we have to scale the chatbot so that it works for multiple users so that it can be deployed in realtime. For this we dockerised the whole application and created a docker image which can be used to spawn many containers and manage them using kubernetes so that it can be deployed in realtime. We also programmed the backend in a way where each container is independent of the other so that any number of containers can be spawned without any issue.
+Finally, we have to scale the chatbot so that it works for multiple users so that it can be deployed in realtime. For this we dockerised the whole application and created a docker image which can be used to spawn many containers and manage them using kubernetes so that it can be deployed in realtime. We also programmed the backend in a way where each container is independent of the other so that any number of containers can be spawned without any issue. Hence the chatbot can be scaled both horizontally(increasing the number of instances of the chatbot) and vertically(increasing the power of the computer) making it really flexible.
+\begin{figure}[htbp]
+	\centerline{\includegraphics[scale=0.3]{hvsv.jpg}}
+	\caption{Horizontal and Vertical Scaling}
+  \label{Havs}
+\end{figure}
 
 \section{Results and Discussion}
 
@@ -192,6 +227,7 @@ Finally, we have to scale the chatbot so that it works for multiple users so tha
 
 \subsubsection{CNN model training methods}
 For the InceptionResNetV2 CNN model, we introduced hyper parameter tuning techniques like data augmentation, EarlyStopping, ReduceLROnPlateau, Class Balancing and custom data preprocessing which gave the best accuracy and improved the training process. We also tried changing with various neural network parameters like learning rate, batch size, optimizers, loss functions and no of epochs for best training results. We also tried the training with and without the erosion and dilation preprocessing function.
+
 
 \subsubsection{Mediapipe based neural network classifier model training methods}
 For this model, we tried changing experimenting with the neural network layers so as to finally land on the one model layer architecture which is the smallest, simple, easy to train and doesn't compromise on accuracy during training or testing time on a live webcam feed. We also tried training with various neural network parameters like learning rate, batch size, optimizers, loss functions and no of epochs for best training results. We also tried the training with and without the translation and transformation preprocessing function to check whether the accuracy is increasing or not.
@@ -238,7 +274,7 @@ We have used Categorical Cross entropy Loss function for the both the models to 
 \end{table}
 
 \subsubsection{CNN model}
-Although the CNN model gave really high accuracy during training and testing, it couldn't not do the same in realtime with a webcam feed. Upon further research into why the model was failing, we found out that we had to do some kind of hand detection in the image since during realtime, the background is not plain all the time as it was in the training data. Also, we the hand might be closer or farther in the image making it bigger or smaller in the image respectively. Another reason is the relative positions of both hands with respect to each other during ISL hand signs as different people show hand signs in different relative hand positions. Also running a CNN model means that predictions are significantly slower as bit as resnet means that our predictions will gradually becomes slower which hinders our main objective which is to make predictions faster. Also complex ISL hand signs like "M" and "N" for example weren't being recoginzed at all. Since we had to address these many problems and also this slower predictions problem cannot be addressed in any way to make it faster we had to move away from this approach for predicting hand signs in the image.
+Although the CNN model gave really high accuracy during training and testing, it couldn't not do the same in realtime with a webcam feed. Upon further research into why the model was failing, we found out that we had to do some kind of hand detection in the image since during realtime, the background is not plain all the time as it was in the training data. Also, we the hand might be closer or farther in the image making it bigger or smaller in the image respectively. Another reason is the relative positions of both hands with respect to each other during ISL hand signs as different people show hand signs in different relative hand positions. Also running a CNN model means that predictions are significantly slower since resnet is a huge layered model which has lot of computations going on which makes predictions gradually slower hindering our main objective which is to make predictions faster. Also complex ISL hand signs like "M" and "N" for example weren't being recoginzed at all. Since we had to address these many problems and also this slower predictions problem cannot be addressed in any way to make it faster we had to move away from this approach for predicting hand signs in the image. After all the training, we hit an accuracy of 99\% with a loss of around 0.35. Altough it performed really well the training, as stated above it does not perform well when used on a real time webcam feed.
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.5]{cnn_accuracy.jpg}}
 	\caption{CNN model accuracy}
@@ -251,7 +287,7 @@ Although the CNN model gave really high accuracy during training and testing, it
 \end{figure}
 
 \subsubsection{Mediapipe based neural network classifier model}
-This model as usual gave really high accuracy during training and testing but failed to give the same during runtime initially. After further research into this, we found out that the dataset we were using hand pictures in which mediapipe couldn't detect the hands or detected them incorrectly in many cases which lead to bad training. But it started giving better accuracy once we used the new dataset to train the model. But this time the issue is that the ISL hand signs are classified correctly only if we put the hands at the same distance from the camera as we put during the making of dataset as putting it nearer or farther than necessary would make them big or small in the image respectively. We also had this problem of relative positions of hands which differs for each person due to their hand size. We had to address the hands sizes and relative positions in the image and we did that using the special preprocessing function which translates and transforms all the hand coordinates to a range between 0 and 1 and removes the relativeness between the position of two hands as we only needed to know the shapes of the two hands to predict the image. Using this preprocessing function we were able to get really high training and testing accuracy and it was able to detect the ISL hand signs in realtime with a live webcam feed. This model could detect all the 36 characters including the complex ones in realtime without any hassle. Most of all this model was fast in terms of predictions. Hence we had to go forward with this model architecture for our predictions on ISL hand signs in the image.
+This model as usual gave really high accuracy during training and testing but failed to give the same during runtime initially. After further research into this, we found out that the dataset we were using hand pictures in which mediapipe couldn't detect the hands or detected them incorrectly in many cases which lead to bad training. But it started giving better accuracy once we used the new dataset to train the model. But this time the issue is that the ISL hand signs are classified correctly only if we put the hands at the same distance from the camera as we put during the making of dataset as putting it nearer or farther than necessary would make them big or small in the image respectively. We also had this problem of relative positions of hands which differs for each person due to their hand size. We had to address the hands sizes and relative positions in the image and we did that using the special preprocessing function which translates and transforms all the hand coordinates to a range between 0 and 1 and removes the relativeness between the position of two hands as we only needed to know the shapes of the two hands to predict the image. Using this preprocessing function we were able to get really high training and testing accuracy and it was able to detect the ISL hand signs in realtime with a live webcam feed. This model could detect all the 36 characters including the complex ones in realtime without any hassle. Most of all this model was fast in terms of predictions. Hence we had to go forward with this model architecture for our predictions on ISL hand signs in the image. After all the training, we hit an accuracy of around 99\% and a loss of around 0.15\% with this model as well but the difference was clear when this model was run on realtime webcam feed. It was able to detect all the characters without any issues.
 \begin{figure}[htbp]
 	\centerline{\includegraphics[scale=0.15]{neural_network_accuracy.png}}
 	\caption{Neural Network model accuracy}
@@ -264,21 +300,10 @@ This model as usual gave really high accuracy during training and testing but fa
 \end{figure}
 
 \subsubsection{NLP Word Segmentation}
-The wordsegment python module worked great for basic words but it could not handle any kind of nouns as in the below example. Hence we can conclude that it works perfectly on words in dictionary but not on nouns.
-\begin{figure}[htbp]
-	\centerline{\includegraphics[scale=0.25]{word_segment.png}}
-	\caption{NLP Word segmentation module results}
-	\label{Word_segment}
-\end{figure}
+The wordsegment python module worked great for basic words but it could not handle any kind of nouns as in \ref{NLP_stats}. Hence we can conclude that it works perfectly on words in dictionary but not on nouns.
 
 \subsubsection{NLP Spell Checking}
-The pyspellchecker python module worked great at correcting words at an edit distance of two but the issue that comes with is that if one wrong spelled group of letters can have many different correct words. For an example, let us take the group of letters in \ref{Spell_check}. Now the group of letters "CUV" can mean the word "CUB" or "CUT" but since the word "CUT" is more closer to "CUV" in terms of edit distance, it took this word instead of the word "CUB".
-\begin{figure}[htbp]
-	\centerline{\includegraphics[scale=0.4]{spell_check.png}}
-	\caption{NLP Spell checking module results}
-	\label{Spell_check}
-\end{figure}
-
+The pyspellchecker python module worked great at correcting words at an edit distance of two but the issue that comes with is that if one wrong spelled group of letters can have many different correct words. For an example, let us take the group of letters from \ref{NLP_stats}. Now the group of letters "CUV" can mean the word "CUB" or "CUT" but since the word "CUT" is more closer to "CUV" in terms of edit distance, it took this word instead of the word "CUB".
 
 \chapter{Merits, Limitations and Future Scope}
 
