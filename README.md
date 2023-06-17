@@ -1,9 +1,6 @@
 # fyp
-## test
-### test1
-#### test2
 
-Installing dependencies
+## Installing dependencies
 ```bash
 pacman -Syu --noconfirm
 pacman -Syu go --noconfirm
@@ -18,7 +15,7 @@ pip install pyspellchecker
 pip install wordsegment
 ```
 
-Running the server
+## Running the server
 ```bash
 go mod tidy
 go fmt ./...
@@ -26,12 +23,12 @@ go generate
 go run main.go
 ```
 
-Building docker image
+## Building docker image
 ```bash
 sudo docker build -t fyp .
 ```
 
-Running a container of that image
+## Running a container of that image
 ```bash
 sudo docker run -it -p 8080:8080 fyp
 ```
