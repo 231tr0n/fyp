@@ -1,4 +1,4 @@
-module github.com/231tr0n/fyp
+module fyp
 
 go 1.22.1
 
