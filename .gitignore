@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 app/mlmodels/video_predict/3d_resenet_transformer_enc8.pth
+app/go.sum

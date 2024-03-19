@@ -8,7 +8,7 @@ RUN pacman -Syu tensorflow --noconfirm
 RUN pacman -Syu python-tensorflow --noconfirm
 RUN pip install opencv-python
 RUN pip install mediapipe
-RUN pip install pyspellchecker 
+RUN pip install pyspellchecker
 RUN pip install wordsegment
 EXPOSE 8080
 COPY app /root/app
